@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Job Portal - Applicant Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-item {
+            transition: all 0.2s ease;
+        }
+        .sidebar-item:hover {
+            transform: translateX(4px);
+        }
+        .active-sidebar-item {
+            border-left: 4px solid #0ea5e9;
+            background-color: rgba(14, 165, 233, 0.1);
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .job-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 border-r border-gray-200 bg-white">
+                <!-- Logo/Brand -->
+                <div class="flex items-center justify-center h-16 px-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-briefcase text-primary-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">JobPortal</span>
+                    </div>
+                </div>
+                
+                <!-- User Profile -->
+                <div class="px-4 py-3 flex items-center space-x-3 border-b border-gray-200">
+                    <div class="relative">
+                        <img class="w-10 h-10 rounded-full" src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+                        <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-green-400"></span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-800">Sarah Johnson</p>
+                        <p class="text-xs text-gray-500">Frontend Developer</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation -->
+                <div class="flex-1 px-3 py-4 overflow-y-auto">
+                    <nav class="space-y-1">
+                        <a href="#" onclick="showPage('dashboard')" class="sidebar-item active-sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-primary-700">
+                            <i class="fas fa-tachometer-alt mr-3 text-primary-600 w-5 text-center"></i>
+                            Dashboard
+                        </a>
+                        
+                        <a href="#" onclick="showPage('find-jobs')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-search mr-3 text-gray-400 w-5 text-center"></i>
+                            Find Jobs
+                        </a>
+                        
+                        <a href="#" onclick="showPage('my-applications')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-file-alt mr-3 text-gray-400 w-5 text-center"></i>
+                            My Applications
+                        </a>
+                        
+                        <a href="#" onclick="showPage('saved-jobs')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-bookmark mr-3 text-gray-400 w-5 text-center"></i>
+                            Saved Jobs
+                        </a>
+                        
+                        <a href="#" onclick="showPage('profile')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-user mr-3 text-gray-400 w-5 text-center"></i>
+                            My Profile
+                        </a>
+                        
+                        <div class="pt-4 mt-4 border-t border-gray-200">
+                            <p class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Account</p>
+                            
+                            <a href="#" onclick="showPage('settings')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50 mt-2">
+                                <i class="fas fa-cog mr-3 text-gray-400 w-5 text-center"></i>
+                                Settings
+                            </a>
+                            
+                            <a href="#" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                                <i class="fas fa-sign-out-alt mr-3 text-gray-400 w-5 text-center"></i>
+                                Logout
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+                
+                <!-- Upgrade Prompt -->
+                <div class="px-4 py-3 border-t border-gray-200 bg-primary-50">
+                    <p class="text-xs text-gray-600 mb-2">Upgrade to Premium to get noticed by employers</p>
+                    <button class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg text-sm">
+                        Upgrade Now
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Header -->
+            <header class="flex items-center justify-between h-16 px-4 bg-white border-b border-gray-200">
+                <div class="flex items-center">
+                    <button class="md:hidden p-2 text-gray-500 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="relative ml-4">
+                        <input type="text" placeholder="Search jobs..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-gray-500 rounded-lg hover:bg-gray-100 relative">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                    </button>
+                    <button class="p-2 text-gray-500 rounded-lg hover:bg-gray-100 relative">
+                        <i class="fas fa-envelope"></i>
+                        <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                    </button>
+                    <div class="flex items-center">
+                        <img class="w-8 h-8 rounded-full" src="https://randomuser.me/api/portraits/women/44.jpg" alt="User">
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-4">
+                <!-- Dashboard Page -->
+                <div id="dashboard" class="page active">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-800">Welcome back, Sarah!</h1>
+                        <p class="text-gray-600">Here's what's happening with your job search</p>
+                    </div>
+                    
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                        <div class="bg-white p-6 rounded-lg shadow border-l-4 border-blue-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">Active Applications</p>
+                                    <p class="text-2xl font-bold">5</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-sm text-green-600"><i class="fas fa-arrow-up mr-1"></i> 2 new this week</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">Interview Invites</p>
+                                    <p class="text-2xl font-bold">3</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-sm text-green-600"><i class="fas fa-arrow-up mr-1"></i> 1 new today</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow border-l-4 border-purple-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">Saved Jobs</p>
+                                    <p class="text-2xl font-bold">12</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                                    <i class="fas fa-bookmark"></i>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-sm text-gray-600"><i class="fas fa-equals mr-1"></i> No change</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow border-l-4 border-yellow-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">Profile Views</p>
+                                    <p class="text-2xl font-bold">24</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                                    <i class="fas fa-eye"></i>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-sm text-green-600"><i class="fas fa-arrow-up mr-1"></i> 5 new this week</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Recommended Jobs -->
+                    <div class="bg-white p-6 rounded-lg shadow mb-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Recommended For You</h3>
+                            <a href="#" onclick="showPage('find-jobs')" class="text-sm text-primary-600 hover:text-primary-800">View all</a>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            <!-- Job Card 1 -->
+                            <div class="job-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                                <div class="flex items-start justify-between mb-3">
+                                    <div class="flex items-center">
+                                        <img class="h-12 w-12 rounded-full" src="https://via.placeholder.com/48" alt="Company">
+                                        <div class="ml-3">
+                                            <h4 class="font-medium text-gray-900">Senior Frontend Developer</h4>
+                                            <p class="text-sm text-gray-500">TechCorp</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-yellow-500">
+                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                </div>
+                                <div class="flex flex-wrap gap-1 mb-3">
+                                    <span class="badge bg-blue-100 text-blue-800">React</span>
+                                    <span class="badge bg-blue-100 text-blue-800">TypeScript</span>
+                                    <span class="badge bg-blue-100 text-blue-800">Redux</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <div class="flex items-center text-gray-500">
+                                        <i class="fas fa-map-marker-alt mr-1"></i>
+                                        <span>San Francisco, CA (Remote)</span>
+                                    </div>
+                                    <span class="font-medium text-gray-900">$120k - $150k</span>
+                                </div>
+                                <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+                                    <span class="text-xs text-gray-500">Posted 2 days ago</span>
+                                    <button class="bg-primary-600 hover:bg-primary-700 text-white px-3 py-1 rounded text-sm">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Job Card 2 -->
+                            <div class="job-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                                <div class="flex items-start justify-between mb-3">
+                                    <div class="flex items-center">
+                                        <img class="h-12 w-12 rounded-full" src="https://via.placeholder.com/48" alt="Company">
+                                        <div class="ml-3">
+                                            <h4 class="font-medium text-gray-900">UI/UX Designer</h4>
+                                            <p class="text-sm text-gray-500">DesignHub</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-yellow-500">
+                                        <i class="fas fa-bookmark"></i>
+                                    </button>
+                                </div>
+                                <div class="flex flex-wrap gap-1 mb-3">
+                                    <span class="badge bg-purple-100 text-purple-800">Figma</span>
+                                    <span class="badge bg-purple-100 text-purple-800">Sketch</span>
+                                    <span class="badge bg-purple-100 text-purple-800">UX Research</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <div class="flex items-center text-gray-500">
+                                        <i class="fas fa-map-marker-alt mr-1"></i>
+                                        <span>New York, NY</span>
+                                    </div>
+                                    <span class="font-medium text-gray-900">$95k - $120k</span>
+                                </div>
+                                <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+                                    <span class="text-xs text-gray-500">Posted 1 week ago</span>
+                                    <button class="bg-primary-600 hover:bg-primary-700 text-white px-3 py-1 rounded text-sm">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Job Card 3 -->
+                            <div class="job-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                                <div class="flex items-start justify-between mb-3">
+                                    <div class="flex items-center">
+                                        <img class="h-12 w-12 rounded-full" src="https://via.placeholder.com/48" alt="Company">
+                                        <div class="ml-3">
+                                            <h4 class="font-medium text-gray-900">Full Stack Developer</h4>
+                                            <p class="text-sm text-gray-500">WebSolutions</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-yellow-500">
+                                        <i class="far fa-bookmark"></i>
+                                    </button>
+                                </div>
+                                <div class="flex flex-wrap gap-1 mb-3">
+                                    <span class="badge bg-blue-100 text-blue-800">Node.js</span>
+                                    <span class="badge bg-blue-100 text-blue-800">React</span>
+                                    <span class="badge bg-blue-100 text-blue-800">MongoDB</span>
+                                </div>
+                                <div class="flex items-center justify-between text-sm">
+                                    <div class="flex items-center text-gray-500">
+                                        <i class="fas fa-map-marker-alt mr-1"></i>
+                                        <span>Remote</span>
+                                    </div>
+                                    <span class="font-medium text-gray-900">$100k - $130k</span>
+                                </div>
+                                <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+                                    <span class="text-xs text-gray-500">Posted 3 days ago</span>
+                                    <button class="bg-primary-600 hover:bg-primary-700 text-white px-3 py-1 rounded text-sm">
+                                        Apply Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Application Status -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Application Status</h3>
+                        <div class="space-y-4">
+                            <!-- Application 1 -->
+                            <div class="flex items-start p-3 border border-gray-200 rounded-lg">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-sm font-medium">Senior Frontend Developer at TechCorp</p>
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                            Under Review
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mt-1">Applied on May 15, 2023</p>
+                                    <div class="mt-2 flex items-center text-sm text-gray-500">
+                                        <i class="fas fa-clock mr-1"></i>
+                                        <span>Last updated: 2 days ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Application 2 -->
+                            <div class="flex items-start p-3 border border-gray-200 rounded-lg">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-sm font-medium">UI/UX Designer at DesignHub</p>
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
+                                            Interview Scheduled
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mt-1">Applied on May 10, 2023</p>
+                                    <div class="mt-2 flex items-center text-sm text-gray-500">
+                                        <i class="fas fa-calendar-alt mr-1"></i>
+                                        <span>Interview: May 25, 2023 at 2:00 PM</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Application 3 -->
+                            <div class="flex items-start p-3 border border-gray-200 rounded-lg">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="ml-3 flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-sm font-medium">Product Manager at InnovateCo</p>
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Offer Received
+                                        </span>
+                                    </div>
+                                    <p class="text-sm text-gray-500 mt-1">Applied on April 28, 2023</p>
+                                    <div class="mt-2 flex items-center text-sm text-gray-500">
+                                        <i class="fas fa-dollar-sign mr-1"></i>
+                                        <span>Offer: $110,000/year + benefits</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Find Jobs Page -->
+                <div id="find-jobs" class="page">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Find Your Dream Job</h1>
+                            <p class="text-gray-600">Browse thousands of job listings</p>
+                        </div>
+                        <button class="flex items-center text-sm text-primary-600 hover:text-primary-800">
+                            <i class="fas fa-sliders-h mr-2"></i> Advanced Filters
+                        </button>
+                    </div>
+
+                    <!-- Search and Filters -->
+                    <div class="bg-white p-4 rounded-lg shadow mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Keywords</label>
+                                <div class="relative">
+                                    <input type="text" placeholder="Job title, keywords, or company" class="pl-10 w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                                <div class="relative">
+                                    <input type="text" placeholder="City or remote" class="pl-10 w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <i class="fas fa-map-marker-alt absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                                <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option>All Categories</option>
+                                    <option>Technology</option>
+                                    <option>Marketing</option>
+                                    <option>Finance</option>
+                                    <option>Design</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jobs List -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+                        <!-- Left Column - Filters -->
+                        <div class="lg:col-span-1">
+                            <div class="bg-white p-4 rounded-lg shadow">
+                                <h3 class="font-medium text-gray-800 mb-3">Filter Jobs</h3>
+                                
+                                <!-- Job Type -->
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-700 mb-2">Job Type</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center">
+                                            <input id="fulltime" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                            <label for="fulltime" class="ml-2 text-sm text-gray-700">Full-time</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="parttime" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                            <label for="parttime" class="ml-2 text-sm text-gray-700">Part-time</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="contract" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                            <label for="contract" class="ml-2 text-sm text-gray-700">Contract</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="remote" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                            <label for="remote" class="ml-2 text-sm text-gray-700">Remote</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Experience Level -->
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-700 mb-2">Experience Level</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center">
+                                            <input id="entry" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                            <label for="entry" class="ml-2 text-sm text-gray-700">Entry Level</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="mid" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                            <label for="mid" class="ml-2 text-sm text-gray-700">Mid Level</label>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <input id="senior" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                            <label for="senior" class="ml-2 text-sm text-gray-700">Senior Level</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Salary Range -->
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-medium text-gray-700 mb-2">Salary Range</h4>
+                                    <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
+                                        <option>Any salary</option>
+                                        <option>$30k - $50k</option>
+                                        <option>$50k - $80k</option>
+                                        <option>$80k - $100k</option>
+                                        <option>$100k+</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Posted Date -->
+                                <div>
+                                    <h4 class="text-sm font-medium text-gray-700 mb-2">Posted Date</h4>
+                                    <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
+                                        <option>Any time</option>
+                                        <option>Last 24 hours</option>
+                                        <option>Last 3 days</option>
+                                        <option>Last week</option>
+                                        <option>Last month</option>
+                                    </select>
+                                </div>
+                                
+                                <button class="w-full mt-4 bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg text-sm">
+                                    Apply Filters
+                                </button>
+                            </div>
+                            
+                            <!-- Email Alerts -->
+                            <div class="bg-white p-4 rounded-lg shadow mt-4">
+                                <h3 class="font-medium text-gray-800 mb-2">Get Job Alerts</h3>
+                                <p class="text-sm text-gray-600 mb-3">Get new jobs for this search by email</p>
+                                <input type="email" placeholder="Your email address" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm mb-2">
+                                <button class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg text-sm">
+                                    Create Alert
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column - Job Listings -->
+                        <div class="lg:col-span-2">
+                            <!-- Sort Options -->
+                            <div class="flex items-center justify-between mb-4">
+                                <p class="text-sm text-gray-600">1,248 jobs found</p>
+                                <div class="flex items-center">
+                                    <span class="text-sm text-gray-600 mr-2">Sort by:</span>
+                                    <select class="border border-gray-300 rounded-lg py-1 px-2 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
+                                        <option>Most Relevant</option>
+                                        <option>Newest</option>
+                                        <option>Highest Salary</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Job Listings -->
+                            <div class="space-y-4">
+                                <!-- Job Listing 1 -->
+                                <div class="job-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="flex items-center">
+                                            <img class="h-12 w-12 rounded-full" src="https://via.placeholder.com/48" alt="Company">
+                                            <div class="ml-3">
+                                                <h4 class="font-medium text-gray-900">Senior Frontend Developer</h4>
+                                                <p class="text-sm text-gray-500">TechCorp • San Francisco, CA</p>
+                                            </div>
+                                        </div>
+                                        <button class="text-gray-400 hover:text-yellow-500">
+                                            <i class="far fa-bookmark"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex flex-wrap gap-1 mb-3">
+                                        <span class="badge bg-blue-100 text-blue-800">React</span>
+                                        <span class="badge bg-blue-100 text-blue-800">TypeScript</span>
+                                        <span class="badge bg-blue-100 text-blue-800">Redux</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-3">We're looking for an experienced frontend developer to join our growing team. You'll be responsible for building user interfaces and implementing new features.</p>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <div class="flex items-center text-gray-500">
+                                            <i class="fas fa-briefcase mr-1"></i>
+                                            <span class="mr-3">Full-time</span>
+                                            <i class="fas fa-clock mr-1"></i>
+                                            <span>Posted 2 days ago</span>
+                                        </div>
+                                        <span class="font-medium text-gray-900">$120k - $150k</span>
+                                    </div>
+                                    <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <i class="fas fa-bolt mr-1 text-yellow-500"></i>
+                                            <span>Actively recruiting</span>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <button class="border border-primary-600 text-primary-600 hover:bg-primary-50 px-3 py-1 rounded text-sm">
+                                                Quick Apply
+                                            </button>
+                                            <button class="bg-primary-600 hover:bg-primary-700 text-white px-3 py-1 rounded text-sm">
+                                                View Details
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Job Listing 2 -->
+                                <div class="job-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="flex items-center">
+                                            <img class="h-12 w-12 rounded-full" src="https://via.placeholder.com/48" alt="Company">
+                                            <div class="ml-3">
+                                                <h4 class="font-medium text-gray-900">UI/UX Designer</h4>
+                                                <p class="text-sm text-gray-500">DesignHub • New York, NY (Remote)</p>
+                                            </div>
+                                        </div>
+                                        <button class="text-yellow-500">
+                                            <i class="fas fa-bookmark"></i>
+                                        </button>
+                                    </div>
+                                    <div class="flex flex-wrap gap-1 mb-3">
+                                        <span class="badge bg-purple-100 text-purple-800">Figma</span>
+                                        <span class="badge bg-purple-100 text-purple-800">Sketch</span>
+                                        <span class="badge bg-purple-100 text-purple-800">UX Research</span>
+                                    </div>
+                                    <p class="text-sm text-gray-600 mb-3">Join our design team to create beautiful, intuitive interfaces for our products. You'll work closely with product managers and engineers to deliver exceptional user experiences.</p>
+                                    <div class="flex items-center justify-between text-sm">
+                                        <div class="flex items-center text-gray-500">
+                                            <i class="fas fa-briefcase mr-1"></i>
+                                            <span class="mr-3">Full-time</span>
+                                            <i class="fas fa-clock mr-1"></i>
+                                            <span>Posted 1 week ago</span>
+                                        </div>
+                                        <span class="font-medium text-gray-900">$95k - $120k</span>
+                                    </div>
+                                    <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <i class="fas fa-bolt mr-1 text-yellow-500"></i>
+                                            <span>Actively recruiting</span>
+                                        </div>
+                                        <div class="flex space-x-2">
+                                            <button class="border border-primary-600 text-primary-600 hover:bg-primary-50 px-3 py-1 rounded text-sm">
+                                                Quick Apply
+                                            </button>
+                                            <button class="bg-primary-600 hover:bg-primary-700 text-white px-3 py-1 rounded text-sm">
+                                                View Details
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- More job listings would go here... -->
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <div class="mt-6 flex items-center justify-between">
+                                <button class="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    <i class="fas fa-chevron-left mr-2"></i> Previous
+                                </button>
+                                <div class="hidden md:flex space-x-2">
+                                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium bg-white text-gray-700">1</button>
+                                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium bg-white text-gray-700">2</button>
+                                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium bg-white text-gray-700">3</button>
+                                    <span class="px-3 py-1 text-sm text-gray-500">...</span>
+                                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium bg-white text-gray-700">8</button>
+                                </div>
+                                <button class="flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                                    Next <i class="fas fa-chevron-right ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- My Applications Page -->
+                <div id="my-applications" class="page">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-800">My Applications</h1>
+                        <p class="text-gray-600">Track the status of your job applications</p>
+                    </div>
+
+                    <!-- Application Status Filters -->
+                    <div class="bg-white p-4 rounded-lg shadow mb-6">
+                        <div class="flex flex-wrap gap-2">
+                            <button class="px-3 py-1 bg-primary-600 text-white rounded-full text-sm">
+                                All Applications (5)
+                            </button>
+                            <button class="px-3 py-1 border border-gray-300 rounded-full text-sm hover:bg-gray-50">
+                                Under Review (2)
+                            </button>
+                            <button class="px-3 py-1 border border-gray-300 rounded-full text-sm hover:bg-gray-50">
+                                Interview (1)
+                            </button>
+                            <button class="px-3 py-1 border border-gray-300 rounded-full text-sm hover:bg-gray-50">
+                                Offer Received (1)
+                            </button>
+                            <button class="px-3 py-1 border border-gray-300 rounded-full text-sm hover:bg-gray-50">
+                                Not Selected (1)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Applications List -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Position
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Company
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Applied On
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- Application 1 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">Senior Frontend Developer</div>
+                                            <div class="text-sm text-gray-500">San Francisco, CA</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/40" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">TechCorp</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            May 15, 2023
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                                Under Review
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-eye"></i></button>
+                                            <button class="text-primary-600 hover:text-primary-900"><i class="fas fa-download"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Application 2 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">UI/UX Designer</div>
+                                            <div class="text-sm text-gray-500">Remote</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/40" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">DesignHub</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            May 10, 2023
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
+                                                Interview
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-eye"></i></button>
+                                            <button class="text-primary-600 hover:text-primary-900"><i class="fas fa-download"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Application 3 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">Product Manager</div>
+                                            <div class="text-sm text-gray-500">New York, NY</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/40" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">InnovateCo</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            April 28, 2023
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Offer Received
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-eye"></i></button>
+                                            <button class="text-primary-600 hover:text-primary-900"><i class="fas fa-download"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- More applications would go here... -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination would go here (same as find jobs page) -->
+                    </div>
+                </div>
+                
+                <!-- Saved Jobs Page -->
+                <div id="saved-jobs" class="page">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-800">Saved Jobs</h1>
+                        <p class="text-gray-600">Your bookmarked job listings</p>
+                    </div>
+
+                    <!-- Saved Jobs List -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Saved Job 1 -->
+                        <div class="job-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex items-center">
+                                    <img class="h-12 w-12 rounded-full" src="https://via.placeholder.com/48" alt="Company">
+                                    <div class="ml-3">
+                                        <h4 class="font-medium text-gray-900">UI/UX Designer</h4>
+                                        <p class="text-sm text-gray-500">DesignHub • New York, NY (Remote)</p>
+                                    </div>
+                                </div>
+                                <button class="text-yellow-500">
+                                    <i class="fas fa-bookmark"></i>
+                                </button>
+                            </div>
+                            <div class="flex flex-wrap gap-1 mb-3">
+                                <span class="badge bg-purple-100 text-purple-800">Figma</span>
+                                <span class="badge bg-purple-100 text-purple-800">Sketch</span>
+                                <span class="badge bg-purple-100 text-purple-800">UX Research</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">Join our design team to create beautiful, intuitive interfaces for our products. You'll work closely with product managers and engineers to deliver exceptional user experiences.</p>
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center text-gray-500">
+                                    <i class="fas fa-briefcase mr-1"></i>
+                                    <span class="mr-3">Full-time</span>
+                                    <i class="fas fa-clock mr-1"></i>
+                                    <span>Posted 1 week ago</span>
+                                </div>
+                                <span class="font-medium text-gray-900">$95k - $120k</span>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+                                <button class="text-gray-500 hover:text-gray-700 text-sm">
+                                    <i class="far fa-trash-alt mr-1"></i> Remove
+                                </button>
+                                <button class="bg-primary-600 hover:bg-primary-700 text-white px-3 py-1 rounded text-sm">
+                                    Apply Now
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Saved Job 2 -->
+                        <div class="job-card bg-white border border-gray-200 rounded-lg p-4 transition-all duration-200">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex items-center">
+                                    <img class="h-12 w-12 rounded-full" src="https://via.placeholder.com/48" alt="Company">
+                                    <div class="ml-3">
+                                        <h4 class="font-medium text-gray-900">Full Stack Developer</h4>
+                                        <p class="text-sm text-gray-500">WebSolutions • Remote</p>
+                                    </div>
+                                </div>
+                                <button class="text-yellow-500">
+                                    <i class="fas fa-bookmark"></i>
+                                </button>
+                            </div>
+                            <div class="flex flex-wrap gap-1 mb-3">
+                                <span class="badge bg-blue-100 text-blue-800">Node.js</span>
+                                <span class="badge bg-blue-100 text-blue-800">React</span>
+                                <span class="badge bg-blue-100 text-blue-800">MongoDB</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-3">We're looking for a full stack developer to help build and maintain our web applications. You'll work across the entire stack and collaborate with our product team.</p>
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center text-gray-500">
+                                    <i class="fas fa-briefcase mr-1"></i>
+                                    <span class="mr-3">Full-time</span>
+                                    <i class="fas fa-clock mr-1"></i>
+                                    <span>Posted 3 days ago</span>
+                                </div>
+                                <span class="font-medium text-gray-900">$100k - $130k</span>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-gray-100 flex justify-between items-center">
+                                <button class="text-gray-500 hover:text-gray-700 text-sm">
+                                    <i class="far fa-trash-alt mr-1"></i> Remove
+                                </button>
+                                <button class="bg-primary-600 hover:bg-primary-700 text-white px-3 py-1 rounded text-sm">
+                                    Apply Now
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- More saved jobs would go here... -->
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div class="bg-white rounded-lg shadow p-8 text-center mt-6" style="display: none;">
+                        <i class="fas fa-bookmark text-gray-300 text-4xl mb-3"></i>
+                        <h3 class="text-lg font-medium text-gray-900 mb-1">No saved jobs yet</h3>
+                        <p class="text-gray-500 mb-4">Save jobs that interest you to compare them later</p>
+                        <button onclick="showPage('find-jobs')" class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg">
+                            Browse Jobs
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Profile Page -->
+                <div id="profile" class="page">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">My Profile</h1>
+                            <p class="text-gray-600">Manage your professional profile</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg flex items-center">
+                                <i class="fas fa-eye mr-2"></i> Preview
+                            </button>
+                            <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center">
+                                <i class="fas fa-download mr-2"></i> Download PDF
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Profile Sections -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <!-- Left Column -->
+                        <div class="lg:col-span-1">
+                            <!-- Profile Card -->
+                            <div class="bg-white rounded-lg shadow overflow-hidden">
+                                <div class="bg-primary-600 p-4 text-center">
+                                    <div class="relative mx-auto w-24 h-24 rounded-full border-4 border-white bg-white">
+                                        <img class="w-full h-full rounded-full" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile">
+                                        <button class="absolute bottom-0 right-0 bg-primary-700 text-white p-1 rounded-full">
+                                            <i class="fas fa-camera text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <h3 class="mt-3 text-white font-medium">Sarah Johnson</h3>
+                                    <p class="text-primary-100">Frontend Developer</p>
+                                </div>
+                                <div class="p-4">
+                                    <div class="mb-4">
+                                        <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Contact</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center text-sm text-gray-600">
+                                                <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                                                <span>sarah.johnson@example.com</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-600">
+                                                <i class="fas fa-phone mr-2 text-gray-400"></i>
+                                                <span>(555) 123-4567</span>
+                                            </div>
+                                            <div class="flex items-center text-sm text-gray-600">
+                                                <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                                                <span>San Francisco, CA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-4">
+                                        <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Links</h4>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center text-sm text-primary-600">
+                                                <i class="fab fa-linkedin mr-2"></i>
+                                                <a href="#" class="hover:underline">linkedin.com/in/sarahjohnson</a>
+                                            </div>
+                                            <div class="flex items-center text-sm text-primary-600">
+                                                <i class="fab fa-github mr-2"></i>
+                                                <a href="#" class="hover:underline">github.com/sarahjohnson</a>
+                                            </div>
+                                            <div class="flex items-center text-sm text-primary-600">
+                                                <i class="fas fa-globe mr-2"></i>
+                                                <a href="#" class="hover:underline">sarahjohnson.dev</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Skills</h4>
+                                        <div class="flex flex-wrap gap-1">
+                                            <span class="badge bg-blue-100 text-blue-800">React</span>
+                                            <span class="badge bg-blue-100 text-blue-800">JavaScript</span>
+                                            <span class="badge bg-blue-100 text-blue-800">TypeScript</span>
+                                            <span class="badge bg-blue-100 text-blue-800">Redux</span>
+                                            <span class="badge bg-blue-100 text-blue-800">HTML/CSS</span>
+                                            <span class="badge bg-blue-100 text-blue-800">Responsive Design</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Profile Completeness -->
+                            <div class="bg-white p-4 rounded-lg shadow mt-4">
+                                <h3 class="font-medium text-gray-800 mb-3">Profile Strength</h3>
+                                <div class="mb-2">
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-gray-600">Complete your profile to get noticed</span>
+                                        <span class="font-medium">75%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-primary-600 h-2 rounded-full" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                        <span class="text-sm text-gray-600">Basic Information</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                        <span class="text-sm text-gray-600">Work Experience</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                        <span class="text-sm text-gray-600">Education</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-circle text-yellow-500 mr-2"></i>
+                                        <span class="text-sm text-gray-600">Skills</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-exclamation-circle text-yellow-500 mr-2"></i>
+                                        <span class="text-sm text-gray-600">Portfolio</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column -->
+                        <div class="lg:col-span-2">
+                            <!-- About Section -->
+                            <div class="bg-white p-6 rounded-lg shadow mb-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-lg font-medium text-gray-800">About</h3>
+                                    <button class="text-primary-600 hover:text-primary-800">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+                                </div>
+                                <p class="text-gray-600">Experienced frontend developer with 5+ years of experience building responsive and accessible web applications. Specialized in React and TypeScript with a strong focus on user experience and performance optimization. Passionate about clean code and mentoring junior developers.</p>
+                            </div>
+                            
+                            <!-- Work Experience -->
+                            <div class="bg-white p-6 rounded-lg shadow mb-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-lg font-medium text-gray-800">Work Experience</h3>
+                                    <button class="text-primary-600 hover:text-primary-800">
+                                        <i class="fas fa-plus"></i> Add
+                                    </button>
+                                </div>
+                                <div class="space-y-4">
+                                    <!-- Experience 1 -->
+                                    <div class="border-l-2 border-primary-500 pl-4 py-1">
+                                        <div class="flex justify-between">
+                                            <h4 class="font-medium text-gray-900">Senior Frontend Developer</h4>
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary-600 hover:text-primary-800">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-800">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600">TechSolutions Inc.</p>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <span>Jan 2020 - Present</span>
+                                            <span class="mx-2">•</span>
+                                            <span>San Francisco, CA</span>
+                                        </div>
+                                        <p class="mt-2 text-gray-600">Lead the frontend development team, implemented new React components, optimized application performance, and mentored junior developers.</p>
+                                    </div>
+                                    
+                                    <!-- Experience 2 -->
+                                    <div class="border-l-2 border-primary-500 pl-4 py-1">
+                                        <div class="flex justify-between">
+                                            <h4 class="font-medium text-gray-900">Frontend Developer</h4>
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary-600 hover:text-primary-800">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-800">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600">WebDesign Co.</p>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <span>Mar 2017 - Dec 2019</span>
+                                            <span class="mx-2">•</span>
+                                            <span>New York, NY</span>
+                                        </div>
+                                        <p class="mt-2 text-gray-600">Developed responsive web applications using React and Redux, collaborated with designers to implement UI/UX best practices.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Education -->
+                            <div class="bg-white p-6 rounded-lg shadow mb-6">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-lg font-medium text-gray-800">Education</h3>
+                                    <button class="text-primary-600 hover:text-primary-800">
+                                        <i class="fas fa-plus"></i> Add
+                                    </button>
+                                </div>
+                                <div class="space-y-4">
+                                    <!-- Education 1 -->
+                                    <div class="border-l-2 border-primary-500 pl-4 py-1">
+                                        <div class="flex justify-between">
+                                            <h4 class="font-medium text-gray-900">Master of Computer Science</h4>
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary-600 hover:text-primary-800">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-800">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600">Stanford University</p>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <span>2015 - 2017</span>
+                                            <span class="mx-2">•</span>
+                                            <span>Palo Alto, CA</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Education 2 -->
+                                    <div class="border-l-2 border-primary-500 pl-4 py-1">
+                                        <div class="flex justify-between">
+                                            <h4 class="font-medium text-gray-900">Bachelor of Science in Computer Engineering</h4>
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary-600 hover:text-primary-800">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-800">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600">University of California, Berkeley</p>
+                                        <div class="flex items-center text-sm text-gray-500">
+                                            <span>2011 - 2015</span>
+                                            <span class="mx-2">•</span>
+                                            <span>Berkeley, CA</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Portfolio Projects -->
+                            <div class="bg-white p-6 rounded-lg shadow">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-lg font-medium text-gray-800">Portfolio Projects</h3>
+                                    <button class="text-primary-600 hover:text-primary-800">
+                                        <i class="fas fa-plus"></i> Add
+                                    </button>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <!-- Project 1 -->
+                                    <div class="border rounded-lg p-4">
+                                        <div class="flex justify-between mb-2">
+                                            <h4 class="font-medium text-gray-900">E-commerce Dashboard</h4>
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary-600 hover:text-primary-800">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-800">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mb-3">A React-based admin dashboard for e-commerce businesses with real-time analytics and inventory management.</p>
+                                        <div class="flex flex-wrap gap-1 mb-3">
+                                            <span class="badge bg-blue-100 text-blue-800">React</span>
+                                            <span class="badge bg-blue-100 text-blue-800">Chart.js</span>
+                                            <span class="badge bg-blue-100 text-blue-800">Firebase</span>
+                                        </div>
+                                        <a href="#" class="text-sm text-primary-600 hover:underline">View Project →</a>
+                                    </div>
+                                    
+                                    <!-- Project 2 -->
+                                    <div class="border rounded-lg p-4">
+                                        <div class="flex justify-between mb-2">
+                                            <h4 class="font-medium text-gray-900">Task Management App</h4>
+                                            <div class="flex space-x-2">
+                                                <button class="text-primary-600 hover:text-primary-800">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="text-red-600 hover:text-red-800">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm text-gray-600 mb-3">A collaborative task management application with drag-and-drop functionality and team features.</p>
+                                        <div class="flex flex-wrap gap-1 mb-3">
+                                            <span class="badge bg-blue-100 text-blue-800">React</span>
+                                            <span class="badge bg-blue-100 text-blue-800">TypeScript</span>
+                                            <span class="badge bg-blue-100 text-blue-800">Node.js</span>
+                                        </div>
+                                        <a href="#" class="text-sm text-primary-600 hover:underline">View Project →</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Settings Page -->
+                <div id="settings" class="page">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-800">Account Settings</h1>
+                        <p class="text-gray-600">Manage your account and preferences</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="divide-y divide-gray-200">
+                            <!-- Account Settings -->
+                            <div class="p-6">
+                                <h3 class="text-lg font-medium text-gray-900 mb-4">Account Information</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                        <input type="email" value="sarah.johnson@example.com" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                                            <input type="text" value="Sarah" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                                            <input type="text" value="Johnson" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                        <input type="tel" value="(555) 123-4567" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                                        <input type="text" value="San Francisco, CA" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Change Password -->
+                            <div class="p-6">
+                                <h3 class="text-lg font-medium text-gray-900 mb-4">Change Password</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Current Password</label>
+                                        <input type="password" placeholder="Enter current password" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                                        <input type="password" placeholder="Enter new password" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password</label>
+                                        <input type="password" placeholder="Confirm new password" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Notification Settings -->
+                            <div class="p-6">
+                                <h3 class="text-lg font-medium text-gray-900 mb-4">Notification Preferences</h3>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-700">Job Alerts</p>
+                                            <p class="text-sm text-gray-500">Get notified about new job postings</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-700">Application Updates</p>
+                                            <p class="text-sm text-gray-500">Get notified about your application status</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <p class="text-sm font-medium text-gray-700">Messages</p>
+                                            <p class="text-sm text-gray-500">Get notified about new messages from employers</p>
+                                        </div>
+                                        <label class="relative inline-flex items-center cursor-pointer">
+                                            <input type="checkbox" value="" class="sr-only peer" checked>
+                                            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-600"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Save Button -->
+                            <div class="p-4 bg-gray-50 text-right">
+                                <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Simple page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active sidebar item
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active-sidebar-item', 'text-primary-700');
+                item.querySelector('i').classList.remove('text-primary-600');
+                item.querySelector('i').classList.add('text-gray-400');
+            });
+            
+            // Set clicked item as active
+            event.currentTarget.classList.add('active-sidebar-item', 'text-primary-700');
+            event.currentTarget.querySelector('i').classList.remove('text-gray-400');
+            event.currentTarget.querySelector('i').classList.add('text-primary-600');
+            
+            // Prevent default link behavior
+            event.preventDefault();
+        }
+    </script>
+</body>
+</html>

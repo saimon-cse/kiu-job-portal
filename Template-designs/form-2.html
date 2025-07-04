@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Application Form</title>
+    <style>
+        /* Color Scheme */
+        :root {
+            --primary-color: #1a5276;  /* Dark blue */
+            --secondary-color: #2980b9; /* Medium blue */
+            --accent-color: #e74c3c;    /* Red */
+            --light-bg: #f8f9fa;       /* Light gray */
+            --border-color: #d5dbdb;
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        body {
+            font-family: "Calibri", "Arial", sans-serif;
+            line-height: 1.5;
+            color: #333;
+            font-size: 12pt;
+            background-color: #f5f7fa;
+            padding: 0;
+            margin: 0;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            margin: 0 auto;
+            box-sizing: border-box;
+            background: white;
+            position: relative;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Header with color */
+        .header {
+            text-align: center;
+            margin-bottom: 10mm;
+            padding-bottom: 5mm;
+            border-bottom: 3px solid var(--primary-color);
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px;
+            margin: -15mm -15mm 10mm -15mm;
+        }
+
+        .header h1 {
+            font-size: 18pt;
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .header h2 {
+            font-size: 14pt;
+            margin: 5px 0 0 0;
+            font-weight: normal;
+        }
+
+        /* Section styling */
+        .section {
+            margin-bottom: 8mm;
+            page-break-inside: avoid;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .section-title {
+            font-size: 13pt;
+            font-weight: bold;
+            margin-bottom: 3mm;
+            color: var(--primary-color);
+            padding-bottom: 2mm;
+            border-bottom: 2px solid var(--secondary-color);
+        }
+
+        /* Two column layout */
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .column {
+            width: 48%;
+        }
+
+        /* Info items with subtle hover */
+        .info-item {
+            margin-bottom: 3mm;
+            display: flex;
+            padding: 3px;
+            border-radius: 3px;
+        }
+
+        .info-item:hover {
+            background-color: var(--light-bg);
+        }
+
+        .info-label {
+            font-weight: bold;
+            min-width: 50mm;
+            display: inline-block;
+            color: var(--primary-color);
+        }
+
+        /* Tables with colored headers */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 5mm;
+            font-size: 11pt;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            padding: 3mm 2mm;
+            text-align: left;
+        }
+
+        td {
+            padding: 2mm;
+            border: 1px solid var(--border-color);
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--light-bg);
+        }
+
+        /* Signature section */
+        .signature-section {
+            margin-top: 15mm;
+            padding-top: 5mm;
+            border-top: 1px dashed var(--primary-color);
+        }
+
+        .signature-line {
+            width: 70mm;
+            border-bottom: 1px solid var(--primary-color);
+            margin: 5mm 0 2mm 0;
+        }
+
+        /* Footer note */
+        .footer {
+            font-size: 10pt;
+            margin-top: 10mm;
+            padding-top: 2mm;
+            border-top: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        /* Circular info box */
+        .circular-info {
+            background-color: var(--light-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 5px 10px;
+            margin-bottom: 5mm;
+        }
+
+        /* Print adjustments */
+        @media print {
+            body {
+                background: none;
+            }
+            .page {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 15mm;
+                box-shadow: none;
+            }
+            .header {
+                color: white;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            th {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- Header with university info -->
+        <div class="header">
+            <h1>JASHORE UNIVERSITY OF SCIENCE AND TECHNOLOGY</h1>
+            <h2>Teacher Recruitment Application Form</h2>
+            <div class="circular-info">
+                Circular No: <strong>123/2023</strong> | Date: <strong>15 June 2023</strong>
+            </div>
+        </div>
+
+        <!-- Position Information -->
+        <div class="section">
+            <div class="info-item">
+                <span class="info-label">Name of the Post:</span>
+                <span>Assistant Professor</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Department/Office:</span>
+                <span>Computer Science and Engineering</span>
+            </div>
+        </div>
+
+        <!-- Personal Information -->
+        <div class="section">
+            <div class="section-title">Personal Information</div>
+            <div class="two-column">
+                <div class="column">
+                    <div class="info-item">
+                        <span class="info-label">Full Name (Bengali):</span>
+                        <span>ড. মোহাম্মদ আলী</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Full Name (English):</span>
+                        <span>Dr. Mohammad Ali</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Father's Name (Bengali):</span>
+                        <span>মোঃ আব্দুর রহমান</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Father's Name (English):</span>
+                        <span>Md. Abdur Rahman</span>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="info-item">
+                        <span class="info-label">Mother's Name (Bengali):</span>
+                        <span>আয়েশা বেগম</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Spouse's Name (Bengali):</span>
+                        <span>ফাতেমা আক্তার</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Date of Birth:</span>
+                        <span>15 January 1985 (Age: 38)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="two-column" style="margin-top: 5px;">
+                <div class="column">
+                    <div class="info-item">
+                        <span class="info-label">Nationality:</span>
+                        <span>Bangladeshi</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Religion:</span>
+                        <span>Islam</span>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="info-item">
+                        <span class="info-label">Marital Status:</span>
+                        <span>Married</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Phone/Mobile:</span>
+                        <span>+880 1711 123456</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Address Information -->
+        <div class="section">
+            <div class="section-title">Address Information</div>
+            <div class="two-column">
+                <div class="column">
+                    <div class="info-item" style="align-items: flex-start;">
+                        <span class="info-label">Permanent Address (Bengali):</span>
+                        <span>১২৩ মেইন রোড, মোহাম্মদপুর, ঢাকা ১২০৭</span>
+                    </div>
+                    <div class="info-item" style="align-items: flex-start;">
+                        <span class="info-label">Permanent Address (English):</span>
+                        <span>123 Main Road, Mohammadpur, Dhaka 1207</span>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="info-item" style="align-items: flex-start;">
+                        <span class="info-label">Present Address (Bengali):</span>
+                        <span>জাহাঙ্গীরনগর বিশ্ববিদ্যালয় আবাসিক এলাকা, সাভার, ঢাকা</span>
+                    </div>
+                    <div class="info-item" style="align-items: flex-start;">
+                        <span class="info-label">Present Address (English):</span>
+                        <span>Jahangirnagar University Residential Area, Savar, Dhaka</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Qualifications -->
+        <div class="section">
+            <div class="section-title">Educational Qualifications</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Institution</th>
+                        <th>Period</th>
+                        <th>Exam/Degree</th>
+                        <th>Result</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dhaka University</td>
+                        <td>2010-2012</td>
+                        <td>PhD in Computer Science</td>
+                        <td>3.85/4.00</td>
+                        <td>2012</td>
+                    </tr>
+                    <tr>
+                        <td>BUET</td>
+                        <td>2005-2007</td>
+                        <td>MSc in CSE</td>
+                        <td>3.75/4.00</td>
+                        <td>2007</td>
+                    </tr>
+                    <tr>
+                        <td>Dhaka College</td>
+                        <td>2000-2002</td>
+                        <td>HSC</td>
+                        <td>5.00/5.00</td>
+                        <td>2002</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Professional Experience -->
+        <div class="section">
+            <div class="section-title">Professional Experience</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Institution</th>
+                        <th>Type</th>
+                        <th>Position</th>
+                        <th>Period</th>
+                        <th>Responsibilities</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Jahangirnagar University</td>
+                        <td>Government</td>
+                        <td>Assistant Professor</td>
+                        <td>2018-Present</td>
+                        <td>Teaching, Research</td>
+                    </tr>
+                    <tr>
+                        <td>Dhaka University</td>
+                        <td>Government</td>
+                        <td>Lecturer</td>
+                        <td>2013-2018</td>
+                        <td>Teaching</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Publications -->
+        <div class="section">
+            <div class="section-title">Publications</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Published In</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Deep Learning Approaches for Bengali NLP</td>
+                        <td>Journal Article</td>
+                        <td>IEEE Access</td>
+                        <td>2021</td>
+                    </tr>
+                    <tr>
+                        <td>AI in Education: Bangladesh Perspective</td>
+                        <td>Conference Paper</td>
+                        <td>ICICT 2020</td>
+                        <td>2020</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="section">
+            <div class="section-title">Additional Information</div>
+            <div class="two-column">
+                <div class="column">
+                    <div class="info-item" style="align-items: flex-start;">
+                        <span class="info-label">Training Attended:</span>
+                        <span>
+                            • Advanced Machine Learning Workshop (2019)<br>
+                            • University Teaching Methods (2018)
+                        </span>
+                    </div>
+                    <div class="info-item" style="align-items: flex-start;">
+                        <span class="info-label">Languages Known:</span>
+                        <span>
+                            • Bengali: Native<br>
+                            • English: Fluent<br>
+                            • Arabic: Intermediate
+                        </span>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="info-item">
+                        <span class="info-label">Service Commitment:</span>
+                        <span>No</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Quota Information:</span>
+                        <span>None</span>
+                    </div>
+                    <div class="info-item" style="align-items: flex-start;">
+                        <span class="info-label">Bank Payment:</span>
+                        <span>
+                            Sonali Bank, Jashore Branch<br>
+                            Pay Order #123456 (500 BDT)<br>
+                            Date: 10 July 2023
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Referees -->
+        <div class="section">
+            <div class="section-title">Referees</div>
+            <div class="two-column">
+                <div class="column">
+                    <div class="info-item" style="align-items: flex-start;">
+                        <span class="info-label">Referee 1:</span>
+                        <span>
+                            <strong>Prof. Rahman Khan</strong><br>
+                            Professor, Dhaka University<br>
+                            Email: rahman.khan@du.ac.bd<br>
+                            Phone: +880 1711 234567
+                        </span>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="info-item" style="align-items: flex-start;">
+                        <span class="info-label">Referee 2:</span>
+                        <span>
+                            <strong>Dr. Fatema Begum</strong><br>
+                            Associate Professor, BUET<br>
+                            Email: fatema.begum@buet.ac.bd<br>
+                            Phone: +880 1811 345678
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signature -->
+        <div class="signature-section">
+            <div class="two-column">
+                <div class="column">
+                    <div class="info-item">
+                        <span class="info-label">Date:</span>
+                        <span>15 July 2023</span>
+                    </div>
+                </div>
+                <div class="column" style="text-align: center;">
+                    <div class="signature-line"></div>
+                    <div>Signature of the Applicant</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer note -->
+        <div class="footer">
+            <p><strong>Note:</strong> Application with all documents must reach the Registrar's office by 30 July 2023. Incomplete applications will not be considered.</p>
+        </div>
+    </div>
+
+    <script>
+        // This would be populated with actual data from your database
+        function populateForm(data) {
+            // Example: document.getElementById('full_name_en').textContent = data.full_name_en;
+            // Implement similar lines for all fields
+        }
+
+        // Auto-print when converted to PDF
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fetch data from backend based on URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const applicationId = urlParams.get('id');
+            
+            if (applicationId) {
+                fetch(`/api/application/${applicationId}`)
+                    .then(response => response.json())
+                    .then(data => populateForm(data))
+                    .catch(error => console.error('Error:', error));
+            }
+            
+            // For demo purposes, we'll simulate a print command
+            // In production, you might want a button to trigger this
+            setTimeout(() => {
+                window.print();
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

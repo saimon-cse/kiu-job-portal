@@ -1,0 +1,84 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\user\ProfilePreviewController;
+
+use App\Http\Controllers\User\EducationController;
+use App\Http\Controllers\User\ExperienceController;
+use App\Http\Controllers\User\PublicationController;
+use App\Http\Controllers\User\LanguageController;
+use App\Http\Controllers\User\RefereeController;
+use App\Http\Controllers\User\TrainingController;
+use App\Http\Controllers\User\DocumentController;
+use App\Http\Controllers\User\SettingsController as UserSettingsController;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+
+// routes/web.php
+Route::middleware('auth')->group(function () {
+       // --- Personal Information / Profile Routes ---
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // THIS IS THE MISSING ROUTE. ADD THIS LINE:
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+    // This route shows the page with password and account deletion forms.
+    Route::get('/settings', UserSettingsController::class)->name('profile.settings');
+
+    Route::get('/my-profile/preview', [ProfilePreviewController::class, 'show'])->name('profile.preview');
+
+
+
+    // ---------------------------------------------------------------------
+    // TYPE B: "Multiple Records" Management Routes (The Rest)
+    // ---------------------------------------------------------------------
+    // For these, we use `Route::resource`. This is a powerful helper that automatically
+    // creates all the necessary CRUD routes for a resource.
+    // (index, create, store, edit, update, destroy)
+
+    // Manages Education records (List, Create, Edit, Delete)
+    Route::resource('education', EducationController::class)->except(['show']);
+
+    // Manages Work Experience records
+    Route::resource('experience', ExperienceController::class)->except(['show']);
+
+    // Manages Publication records
+    Route::resource('publication', PublicationController::class)->except(['show']);
+
+    // Manages Language Proficiency records
+    Route::resource('language', LanguageController::class)->except(['show']);
+
+    // Manages Referee records
+    Route::resource('referee', RefereeController::class)->except(['show']);
+
+    // Manages Training records
+    Route::resource('training', TrainingController::class)->except(['show']);
+
+    // Manages Document records
+    Route::resource('document', DocumentController::class)->except(['show']);
+
+});

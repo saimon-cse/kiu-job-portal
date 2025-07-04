@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobPortal Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar-item {
+            transition: all 0.2s ease;
+        }
+        .sidebar-item:hover {
+            transform: translateX(4px);
+        }
+        .active-sidebar-item {
+            border-left: 4px solid #0ea5e9;
+            background-color: rgba(14, 165, 233, 0.1);
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="hidden md:flex md:flex-shrink-0">
+            <div class="flex flex-col w-64 border-r border-gray-200 bg-white">
+                <!-- Logo/Brand -->
+                <div class="flex items-center justify-center h-16 px-4">
+                    <div class="flex items-center">
+                        <i class="fas fa-briefcase text-primary-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">JobPortal</span>
+                    </div>
+                </div>
+                
+                <!-- User Profile -->
+                <div class="px-4 py-3 flex items-center space-x-3 border-b border-gray-200">
+                    <div class="relative">
+                        <img class="w-10 h-10 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                        <span class="absolute bottom-0 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white bg-green-400"></span>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-gray-800">Admin User</p>
+                        <p class="text-xs text-gray-500">Super Admin</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation -->
+                <div class="flex-1 px-3 py-4 overflow-y-auto">
+                    <nav class="space-y-1">
+                        <a href="#" onclick="showPage('dashboard')" class="sidebar-item active-sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-primary-700">
+                            <i class="fas fa-tachometer-alt mr-3 text-primary-600 w-5 text-center"></i>
+                            Dashboard
+                        </a>
+                        
+                        <a href="#" onclick="showPage('jobs')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-briefcase mr-3 text-gray-400 w-5 text-center"></i>
+                            Jobs
+                        </a>
+                        
+                        <a href="#" onclick="showPage('candidates')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-users mr-3 text-gray-400 w-5 text-center"></i>
+                            Candidates
+                        </a>
+                        
+                        <a href="#" onclick="showPage('employers')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-building mr-3 text-gray-400 w-5 text-center"></i>
+                            Employers
+                        </a>
+                        
+                        <a href="#" onclick="showPage('applications')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-file-alt mr-3 text-gray-400 w-5 text-center"></i>
+                            Applications
+                        </a>
+                        
+                        <a href="#" onclick="showPage('analytics')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                            <i class="fas fa-chart-line mr-3 text-gray-400 w-5 text-center"></i>
+                            Analytics
+                        </a>
+                        
+                        <div class="pt-4 mt-4 border-t border-gray-200">
+                            <p class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Settings</p>
+                            
+                            <a href="#" onclick="showPage('job-categories')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50 mt-2">
+                                <i class="fas fa-tags mr-3 text-gray-400 w-5 text-center"></i>
+                                Job Categories
+                            </a>
+                            
+                            <a href="#" onclick="showPage('settings')" class="sidebar-item flex items-center px-3 py-2.5 text-sm font-medium rounded-md text-gray-600 hover:text-primary-700 hover:bg-primary-50">
+                                <i class="fas fa-cog mr-3 text-gray-400 w-5 text-center"></i>
+                                System Settings
+                            </a>
+                        </div>
+                    </nav>
+                </div>
+                
+                <!-- Collapse Button -->
+                <div class="px-4 py-3 border-t border-gray-200">
+                    <button class="flex items-center text-sm font-medium text-gray-600 hover:text-primary-700">
+                        <i class="fas fa-chevron-left mr-2"></i>
+                        Collapse sidebar
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            <!-- Header -->
+            <header class="flex items-center justify-between h-16 px-4 bg-white border-b border-gray-200">
+                <div class="flex items-center">
+                    <button class="md:hidden p-2 text-gray-500 rounded-lg hover:bg-gray-100">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="relative ml-4">
+                        <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 text-gray-500 rounded-lg hover:bg-gray-100 relative">
+                        <i class="fas fa-bell"></i>
+                        <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                    </button>
+                    <button class="p-2 text-gray-500 rounded-lg hover:bg-gray-100 relative">
+                        <i class="fas fa-envelope"></i>
+                        <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                    </button>
+                    <div class="flex items-center">
+                        <img class="w-8 h-8 rounded-full" src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-y-auto p-4">
+                <!-- Dashboard Page -->
+                <div id="dashboard" class="page active">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-800">Dashboard Overview</h1>
+                        <p class="text-gray-600">Welcome back, Admin!</p>
+                    </div>
+                    
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                        <div class="bg-white p-6 rounded-lg shadow border-l-4 border-blue-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">Total Jobs Posted</p>
+                                    <p class="text-2xl font-bold">1,248</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-sm text-green-600"><i class="fas fa-arrow-up mr-1"></i> 12.5% from last month</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow border-l-4 border-green-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">Active Candidates</p>
+                                    <p class="text-2xl font-bold">3,542</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-sm text-green-600"><i class="fas fa-arrow-up mr-1"></i> 8.3% from last month</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow border-l-4 border-purple-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">Registered Employers</p>
+                                    <p class="text-2xl font-bold">427</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-sm text-green-600"><i class="fas fa-arrow-up mr-1"></i> 5.1% from last month</p>
+                        </div>
+                        
+                        <div class="bg-white p-6 rounded-lg shadow border-l-4 border-yellow-500">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">New Applications</p>
+                                    <p class="text-2xl font-bold">189</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                            </div>
+                            <p class="mt-2 text-sm text-green-600"><i class="fas fa-arrow-up mr-1"></i> 2.4% from last week</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Charts Row -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <!-- Jobs Chart -->
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Jobs Overview</h3>
+                                <div class="flex space-x-2">
+                                    <button class="px-2 py-1 text-xs border border-gray-300 rounded">Week</button>
+                                    <button class="px-2 py-1 text-xs bg-primary-600 text-white rounded">Month</button>
+                                    <button class="px-2 py-1 text-xs border border-gray-300 rounded">Year</button>
+                                </div>
+                            </div>
+                            <div class="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-400">
+                                [Jobs Chart Placeholder]
+                            </div>
+                        </div>
+                        
+                        <!-- Applications Chart -->
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Applications Trend</h3>
+                                <div class="flex space-x-2">
+                                    <button class="px-2 py-1 text-xs border border-gray-300 rounded">Week</button>
+                                    <button class="px-2 py-1 text-xs bg-primary-600 text-white rounded">Month</button>
+                                    <button class="px-2 py-1 text-xs border border-gray-300 rounded">Year</button>
+                                </div>
+                            </div>
+                            <div class="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-400">
+                                [Applications Chart Placeholder]
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activity -->
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Activity</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">New job posted</p>
+                                    <p class="text-sm text-gray-500">"Senior Developer" by TechCorp - 15 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">New employer registered</p>
+                                    <p class="text-sm text-gray-500">Innovate Solutions - 2 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm font-medium">New application received</p>
+                                    <p class="text-sm text-gray-500">For "Marketing Manager" position - 5 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Jobs Page -->
+                <div id="jobs" class="page">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Job Management</h1>
+                            <p class="text-gray-600">View and manage all job postings</p>
+                        </div>
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-plus mr-2"></i> Add Job
+                        </button>
+                    </div>
+
+                    <!-- Filters and Search -->
+                    <div class="bg-white p-4 rounded-lg shadow mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                                <div class="relative">
+                                    <input type="text" placeholder="Search jobs..." class="pl-10 w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                                <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option>All Categories</option>
+                                    <option>Technology</option>
+                                    <option>Marketing</option>
+                                    <option>Finance</option>
+                                    <option>Healthcare</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                                <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option>All Statuses</option>
+                                    <option>Active</option>
+                                    <option>Expired</option>
+                                    <option>Draft</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg">
+                                    Apply Filters
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Jobs Table -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Job Title
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Company
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Category
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Type
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Applications
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- Job 1 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">Senior Frontend Developer</div>
+                                            <div class="text-sm text-gray-500">Posted: 2 days ago</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/40" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">TechCorp</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Technology
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Full-time
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Active
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            24
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Job 2 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">Marketing Manager</div>
+                                            <div class="text-sm text-gray-500">Posted: 1 week ago</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/40" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">BrandVision</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Marketing
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Full-time
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Active
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            42
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- More jobs would go here... -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination -->
+                        <div class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Previous
+                                </a>
+                                <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Next
+                                </a>
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        Showing <span class="font-medium">1</span> to <span class="font-medium">10</span> of <span class="font-medium">24</span> results
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                        <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <span class="sr-only">Previous</span>
+                                            <i class="fas fa-chevron-left"></i>
+                                        </a>
+                                        <a href="#" aria-current="page" class="z-10 bg-primary-50 border-primary-500 text-primary-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                            1
+                                        </a>
+                                        <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                            2
+                                        </a>
+                                        <a href="#" class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">
+                                            3
+                                        </a>
+                                        <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <span class="sr-only">Next</span>
+                                            <i class="fas fa-chevron-right"></i>
+                                        </a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Candidates Page -->
+                <div id="candidates" class="page">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Candidate Management</h1>
+                            <p class="text-gray-600">View and manage all candidate profiles</p>
+                        </div>
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-plus mr-2"></i> Add Candidate
+                        </button>
+                    </div>
+
+                    <!-- Filters and Search -->
+                    <div class="bg-white p-4 rounded-lg shadow mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                                <div class="relative">
+                                    <input type="text" placeholder="Search candidates..." class="pl-10 w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Skills</label>
+                                <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option>All Skills</option>
+                                    <option>JavaScript</option>
+                                    <option>Marketing</option>
+                                    <option>Finance</option>
+                                    <option>Design</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                                <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option>All Statuses</option>
+                                    <option>Active</option>
+                                    <option>Inactive</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg">
+                                    Apply Filters
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Candidates Table -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Candidate
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Email
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Location
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Skills
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- Candidate 1 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/women/12.jpg" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Sarah Johnson</div>
+                                                    <div class="text-sm text-gray-500">Frontend Developer</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            sarah@example.com
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            New York, USA
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex flex-wrap gap-1">
+                                                <span class="badge bg-blue-100 text-blue-800">React</span>
+                                                <span class="badge bg-blue-100 text-blue-800">JavaScript</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Active
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-eye"></i></button>
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Candidate 2 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/men/42.jpg" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Michael Chen</div>
+                                                    <div class="text-sm text-gray-500">Marketing Specialist</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            michael@example.com
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            San Francisco, USA
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex flex-wrap gap-1">
+                                                <span class="badge bg-purple-100 text-purple-800">SEO</span>
+                                                <span class="badge bg-purple-100 text-purple-800">Content</span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Active
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-eye"></i></button>
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- More candidates would go here... -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination would go here (same as jobs page) -->
+                    </div>
+                </div>
+                
+                <!-- Employers Page -->
+                <div id="employers" class="page">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Employer Management</h1>
+                            <p class="text-gray-600">View and manage all employer accounts</p>
+                        </div>
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-plus mr-2"></i> Add Employer
+                        </button>
+                    </div>
+
+                    <!-- Filters and Search -->
+                    <div class="bg-white p-4 rounded-lg shadow mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                                <div class="relative">
+                                    <input type="text" placeholder="Search employers..." class="pl-10 w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Industry</label>
+                                <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option>All Industries</option>
+                                    <option>Technology</option>
+                                    <option>Finance</option>
+                                    <option>Healthcare</option>
+                                    <option>Retail</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                                <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option>All Statuses</option>
+                                    <option>Verified</option>
+                                    <option>Pending</option>
+                                    <option>Suspended</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg">
+                                    Apply Filters
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Employers Table -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Company
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Contact
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Industry
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Jobs Posted
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- Employer 1 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/40" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">TechCorp</div>
+                                                    <div class="text-sm text-gray-500">New York, USA</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">John Smith</div>
+                                            <div class="text-sm text-gray-500">john@techcorp.com</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Technology
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            12
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Verified
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-eye"></i></button>
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Employer 2 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://via.placeholder.com/40" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">FinancePro</div>
+                                                    <div class="text-sm text-gray-500">Chicago, USA</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm text-gray-900">Emily Davis</div>
+                                            <div class="text-sm text-gray-500">emily@financepro.com</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            Finance
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            8
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                Pending
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-eye"></i></button>
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- More employers would go here... -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination would go here (same as jobs page) -->
+                    </div>
+                </div>
+                
+                <!-- Applications Page -->
+                <div id="applications" class="page">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Application Management</h1>
+                            <p class="text-gray-600">View and manage all job applications</p>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="border border-gray-300 hover:bg-gray-50 text-gray-700 px-4 py-2 rounded-lg flex items-center">
+                                <i class="fas fa-download mr-2"></i> Export
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Filters and Search -->
+                    <div class="bg-white p-4 rounded-lg shadow mb-6">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Search</label>
+                                <div class="relative">
+                                    <input type="text" placeholder="Search applications..." class="pl-10 w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Job</label>
+                                <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option>All Jobs</option>
+                                    <option>Senior Developer</option>
+                                    <option>Marketing Manager</option>
+                                    <option>Finance Analyst</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                                <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    <option>All Statuses</option>
+                                    <option>New</option>
+                                    <option>Reviewed</option>
+                                    <option>Interview</option>
+                                    <option>Rejected</option>
+                                    <option>Hired</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button class="w-full bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg">
+                                    Apply Filters
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Applications Table -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Candidate
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Job
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Applied On
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- Application 1 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/women/12.jpg" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Sarah Johnson</div>
+                                                    <div class="text-sm text-gray-500">Frontend Developer</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">Senior Frontend Developer</div>
+                                            <div class="text-sm text-gray-500">TechCorp</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            May 15, 2023
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
+                                                New
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-eye"></i></button>
+                                            <button class="text-primary-600 hover:text-primary-900"><i class="fas fa-download"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Application 2 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded-full" src="https://randomuser.me/api/portraits/men/42.jpg" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Michael Chen</div>
+                                                    <div class="text-sm text-gray-500">Marketing Specialist</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="text-sm font-medium text-gray-900">Marketing Manager</div>
+                                            <div class="text-sm text-gray-500">BrandVision</div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            May 12, 2023
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-purple-100 text-purple-800">
+                                                Interview
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-eye"></i></button>
+                                            <button class="text-primary-600 hover:text-primary-900"><i class="fas fa-download"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- More applications would go here... -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination would go here (same as jobs page) -->
+                    </div>
+                </div>
+                
+                <!-- Analytics Page -->
+                <div id="analytics" class="page">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-800">Analytics Dashboard</h1>
+                        <p class="text-gray-600">Key metrics and performance indicators for your job portal</p>
+                    </div>
+
+                    <!-- Date Range Selector -->
+                    <div class="bg-white p-4 rounded-lg shadow mb-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h2 class="text-lg font-semibold text-gray-800">Performance Overview</h2>
+                                <p class="text-sm text-gray-500">Last 30 days</p>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm">Week</button>
+                                <button class="px-3 py-1 bg-primary-600 text-white rounded-lg text-sm">Month</button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm">Quarter</button>
+                                <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm">Year</button>
+                                <div class="relative">
+                                    <button class="flex items-center px-3 py-1 border border-gray-300 rounded-lg text-sm">
+                                        Custom <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Metrics -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">Total Jobs Posted</p>
+                                    <p class="text-2xl font-bold">1,248</p>
+                                    <p class="text-sm text-green-600 mt-1"><i class="fas fa-arrow-up mr-1"></i> 12.5% from last month</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-blue-100 text-blue-600">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">Total Applications</p>
+                                    <p class="text-2xl font-bold">3,542</p>
+                                    <p class="text-sm text-green-600 mt-1"><i class="fas fa-arrow-up mr-1"></i> 8.3% from last month</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-green-100 text-green-600">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">Application Rate</p>
+                                    <p class="text-2xl font-bold">2.84</p>
+                                    <p class="text-sm text-red-600 mt-1"><i class="fas fa-arrow-down mr-1"></i> 1.1% from last month</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-purple-100 text-purple-600">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-gray-500">New Employers</p>
+                                    <p class="text-2xl font-bold">42</p>
+                                    <p class="text-sm text-green-600 mt-1"><i class="fas fa-arrow-up mr-1"></i> 2.4% from last month</p>
+                                </div>
+                                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600">
+                                    <i class="fas fa-building"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Row -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                        <!-- Jobs Chart -->
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Jobs Posted</h3>
+                                <div class="flex space-x-2">
+                                    <button class="px-2 py-1 text-xs border border-gray-300 rounded">Week</button>
+                                    <button class="px-2 py-1 text-xs bg-primary-600 text-white rounded">Month</button>
+                                    <button class="px-2 py-1 text-xs border border-gray-300 rounded">Year</button>
+                                </div>
+                            </div>
+                            <div class="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-400">
+                                [Jobs Chart Placeholder]
+                            </div>
+                        </div>
+                        
+                        <!-- Applications Chart -->
+                        <div class="bg-white p-6 rounded-lg shadow">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Applications Trend</h3>
+                                <div class="flex space-x-2">
+                                    <button class="px-2 py-1 text-xs border border-gray-300 rounded">Week</button>
+                                    <button class="px-2 py-1 text-xs bg-primary-600 text-white rounded">Month</button>
+                                    <button class="px-2 py-1 text-xs border border-gray-300 rounded">Year</button>
+                                </div>
+                            </div>
+                            <div class="h-64 bg-gray-100 rounded flex items-center justify-center text-gray-400">
+                                [Applications Chart Placeholder]
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Jobs -->
+                    <div class="bg-white p-6 rounded-lg shadow mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Most Popular Jobs</h3>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Job Title
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Company
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Applications
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Views
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Conversion
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded" src="https://via.placeholder.com/40" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Senior Developer</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            TechCorp
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            245
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            1,245
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            19.7%
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10">
+                                                    <img class="h-10 w-10 rounded" src="https://via.placeholder.com/40" alt="">
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Marketing Manager</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            BrandVision
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            189
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            876
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            21.6%
+                                        </td>
+                                    </tr>
+                                    <!-- More jobs would go here... -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Job Categories Page -->
+                <div id="job-categories" class="page">
+                    <div class="mb-6 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-2xl font-bold text-gray-800">Job Categories</h1>
+                            <p class="text-gray-600">Manage job categories and specializations</p>
+                        </div>
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg flex items-center">
+                            <i class="fas fa-plus mr-2"></i> Add Category
+                        </button>
+                    </div>
+
+                    <!-- Categories Table -->
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Category
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Jobs
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- Category 1 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                                                    <i class="fas fa-laptop-code"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Technology</div>
+                                                    <div class="text-sm text-gray-500">IT, Software, Hardware</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            342
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Active
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- Category 2 -->
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <div class="flex items-center">
+                                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-600">
+                                                    <i class="fas fa-bullhorn"></i>
+                                                </div>
+                                                <div class="ml-4">
+                                                    <div class="text-sm font-medium text-gray-900">Marketing</div>
+                                                    <div class="text-sm text-gray-500">Digital, Content, SEO</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                            187
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                Active
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                            <button class="text-primary-600 hover:text-primary-900 mr-3"><i class="fas fa-edit"></i></button>
+                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash-alt"></i></button>
+                                        </td>
+                                    </tr>
+                                    
+                                    <!-- More categories would go here... -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination would go here (same as jobs page) -->
+                    </div>
+                </div>
+                
+                <!-- Settings Page -->
+                <div id="settings" class="page">
+                    <div class="mb-6">
+                        <h1 class="text-2xl font-bold text-gray-800">System Settings</h1>
+                        <p class="text-gray-600">Configure your job portal settings</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow overflow-hidden">
+                        <div class="divide-y divide-gray-200">
+                            <!-- General Settings -->
+                            <div class="p-6">
+                                <h3 class="text-lg font-medium text-gray-900 mb-4">General Settings</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Portal Name</label>
+                                        <input type="text" value="JobPortal" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Timezone</label>
+                                        <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                            <option>(UTC-12:00) International Date Line West</option>
+                                            <option selected>(UTC-05:00) Eastern Time (US & Canada)</option>
+                                            <option>(UTC) Greenwich Mean Time : Dublin, Edinburgh, Lisbon, London</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Date Format</label>
+                                        <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                            <option>MM/DD/YYYY</option>
+                                            <option selected>DD/MM/YYYY</option>
+                                            <option>YYYY-MM-DD</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="registration" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                        <label for="registration" class="ml-2 block text-sm text-gray-700">
+                                            Allow candidate registration
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input type="checkbox" id="employer_registration" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                        <label for="employer_registration" class="ml-2 block text-sm text-gray-700">
+                                            Allow employer registration
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Email Settings -->
+                            <div class="p-6">
+                                <h3 class="text-lg font-medium text-gray-900 mb-4">Email Settings</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">SMTP Host</label>
+                                        <input type="text" value="smtp.example.com" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">SMTP Port</label>
+                                            <input type="text" value="587" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">Encryption</label>
+                                            <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                                <option>TLS</option>
+                                                <option>SSL</option>
+                                                <option>None</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">From Email</label>
+                                        <input type="email" value="noreply@jobportal.com" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Save Button -->
+                            <div class="p-4 bg-gray-50 text-right">
+                                <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg">
+                                    Save Settings
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Simple page navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update active sidebar item
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active-sidebar-item', 'text-primary-700');
+                item.querySelector('i').classList.remove('text-primary-600');
+                item.querySelector('i').classList.add('text-gray-400');
+            });
+            
+            // Set clicked item as active
+            event.currentTarget.classList.add('active-sidebar-item', 'text-primary-700');
+            event.currentTarget.querySelector('i').classList.remove('text-gray-400');
+            event.currentTarget.querySelector('i').classList.add('text-primary-600');
+            
+            // Prevent default link behavior
+            event.preventDefault();
+        }
+    </script>
+</body>
+</html>
