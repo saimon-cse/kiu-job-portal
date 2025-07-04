@@ -8,10 +8,11 @@ return new class extends Migration {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->string('circular_no');
-            $table->string('post_name')->nullable(false);
-            $table->string('department_office')->nullable();
+            $table->string('post_name', 5000)->nullable(false);
+            $table->string('department_office', 5000)->nullable();
             $table->text('description')->nullable();
             $table->date('date')->nullable();
+            $table->string('document_path', 5000)->nullable();
             $table->decimal('application_fee', 8, 2)->default(0);
             $table->date('last_date_of_submission')->nullable();
             $table->enum('status', ['open', 'closed', 'archived'])->default('open');

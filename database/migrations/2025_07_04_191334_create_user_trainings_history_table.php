@@ -5,18 +5,20 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('language_proficiencies', function (Blueprint $table) {
+        Schema::create('user_trainings_history', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             // $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('language', 5000)->nullable();
-            // $table->enum('efficiency', ['excellent', 'good', 'poor']);
-            $table->string('efficiency', 5000)->nullable()->default('good');
+            $table->string('training_name', 5000)->nullable();
+            $table->string('institute_name', 5000)->nullable();
+            $table->string('period_from', 5000)->nullable();
+            $table->string('period_to', 5000)->nullable();
+            $table->string('document_path', 5000)->nullable();
             $table->integer('rank')->nullable()->default(0);
             $table->timestamps();
         });
     }
     public function down(): void {
-        Schema::dropIfExists('language_proficiencies');
+        Schema::dropIfExists('user_trainings_history');
     }
 };

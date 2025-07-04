@@ -9,8 +9,8 @@ return new class extends Migration {
     {
         Schema::create('publication_types', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique(); // e.g., "Journal Article", "Book", "Conference Paper"
-            $table->string('slug')->unique(); // e.g., "journal-article", "book", "conference-paper"
+            $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }

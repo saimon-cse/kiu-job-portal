@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('language_proficiencies', function (Blueprint $table) {
+        Schema::create('language_proficiencies_history', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('job_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             // $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('language', 5000)->nullable();
@@ -17,6 +18,6 @@ return new class extends Migration {
         });
     }
     public function down(): void {
-        Schema::dropIfExists('language_proficiencies');
+        Schema::dropIfExists('language_proficiencies_history');
     }
 };
