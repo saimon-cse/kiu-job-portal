@@ -1,20 +1,32 @@
 <div class="space-y-6">
+
+        <!-- Designation / Post -->
+    <div>
+        <label for="post_and_scale" class="block text-sm font-medium text-gray-700">Designation / Post</label>
+        <div class="mt-1">
+            <input type="text" name="post_and_scale" id="post_and_scale" value="{{ old('post_and_scale', isset($experience) ? $experience->post_and_scale : '') }}" required
+                   placeholder="e.g., Software Engineer"
+                   class="block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
+        </div>
+    </div>
+
+
     <!-- Company / Institute Name -->
     <div>
         <label for="institute_name" class="block text-sm font-medium text-gray-700">Company / Institute Name</label>
         <div class="mt-1">
             <input type="text" name="institute_name" id="institute_name" value="{{ old('institute_name', isset($experience) ? $experience->institute_name : '') }}" required
-                   placeholder="e.g., Acme Corporation"
+                   placeholder="e.g., ABC Corporation"
                    class="block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
         </div>
     </div>
 
-    <!-- Designation / Post -->
+        <!-- Institute Type -->
     <div>
-        <label for="post_and_scale" class="block text-sm font-medium text-gray-700">Designation / Post</label>
+        <label for="institute_type" class="block text-sm font-medium text-gray-700">Company / Institute Type (Optional)</label>
         <div class="mt-1">
-            <input type="text" name="post_and_scale" id="post_and_scale" value="{{ old('post_and_scale', isset($experience) ? $experience->post_and_scale : '') }}" required
-                   placeholder="e.g., Senior Software Engineer"
+            <input type="text" name="institute_type" id="institute_type" value="{{ old('institute_type', isset($experience) ? $experience->institute_type : '') }}"
+                   placeholder="e.g., Private, Government, NGO, Public University"
                    class="block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
         </div>
     </div>
@@ -39,22 +51,14 @@
         </div>
     </div>
 
-    <!-- Institute Type -->
-    <div>
-        <label for="institute_type" class="block text-sm font-medium text-gray-700">Company / Institute Type (Optional)</label>
-        <div class="mt-1">
-            <input type="text" name="institute_type" id="institute_type" value="{{ old('institute_type', isset($experience) ? $experience->institute_type : '') }}"
-                   placeholder="e.g., Private, Government, NGO, Public University"
-                   class="block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
-        </div>
-    </div>
+
 
     <!-- Responsibilities / Courses Taught -->
     <div>
         <label for="courses_taught" class="block text-sm font-medium text-gray-700">Key Responsibilities / (Optional)</label>
         <div class="mt-1">
             <textarea name="courses_taught" id="courses_taught" rows="4"
-                      placeholder="e.g., - Developed and maintained REST APIs. - Led a team of junior developers. or - Courses Taught: Data Structures, Algorithms"
+                      {{-- placeholder="e.g., - Developed and maintained REST APIs. - Led a team of junior developers. or - Courses Taught: Data Structures, Algorithms" --}}
                       class="block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">{{ old('courses_taught', isset($experience) ? $experience->courses_taught : '') }}</textarea>
         </div>
     </div>

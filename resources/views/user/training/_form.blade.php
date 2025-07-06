@@ -43,16 +43,16 @@
 
     <!-- Certificate Upload -->
     <div>
-        <label for="certificate_path" class="block text-sm font-medium text-gray-700">Upload Certificate (Optional)</label>
+        <label for="document_path" class="block text-sm font-medium text-gray-700">Upload Documents (Optional)</label>
         <div class="mt-1">
-            <input type="file" name="certificate_path" id="certificate_path"
+            <input type="file" name="document_path" id="document_path"
                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary-50 file:text-primary-700 hover:file:bg-primary-100">
             <p class="text-xs text-gray-500 mt-1">Allowed types: PDF, JPG, PNG. Max size: 2MB.</p>
 
-            @if (isset($training) && $training->certificate_path)
+            @if (isset($training) && $training->document_path)
                 <div class="mt-2">
                     <p class="text-sm text-gray-600">Current file:
-                        <a href="{{ Storage::url($training->certificate_path) }}" target="_blank" class="text-primary-600 hover:underline">View Certificate</a>
+                        <a href="{{ Storage::url($training->document_path) }}" target="_blank" class="text-primary-600 hover:underline">View Certificate</a>
                     </p>
                     <p class="text-xs text-gray-500">Uploading a new file will replace the current one.</p>
                 </div>

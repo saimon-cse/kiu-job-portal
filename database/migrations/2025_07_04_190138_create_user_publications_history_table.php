@@ -18,7 +18,7 @@ return new class extends Migration
              $table->foreignId('job_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('publication_type_id')->constrained()->onDelete('cascade');
-            $table->string('title', 5000)->nullable();
+            $table->text('title')->nullable();
             $table->integer('rank')->nullable()->default(0);
             $table->timestamps();
         });

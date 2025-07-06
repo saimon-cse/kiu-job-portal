@@ -60,7 +60,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function profile(): HasOne
     {
-        return $this->hasOne(UserProfile::class)->whereNull('application_id');
+        return $this->hasOne(UserProfile::class);
     }
 
     /**
@@ -76,7 +76,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function educations(): HasMany
     {
-        return $this->hasMany(UserEducation::class)->whereNull('application_id');
+        return $this->hasMany(UserEducation::class);
     }
 
     /**
@@ -84,7 +84,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function experiences(): HasMany
     {
-        return $this->hasMany(UserExperience::class)->whereNull('application_id');
+        return $this->hasMany(UserExperience::class);
     }
 
     /**
@@ -92,7 +92,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function publications(): HasMany
     {
-        return $this->hasMany(Publication::class)->whereNull('application_id');
+        return $this->hasMany(Publication::class);
     }
 
     /**
@@ -100,7 +100,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function documents(): HasMany
     {
-        return $this->hasMany(UserDocument::class)->whereNull('application_id');
+        return $this->hasMany(UserDocument::class);
     }
 
     /**
@@ -108,7 +108,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function trainings(): HasMany
     {
-        return $this->hasMany(UserTraining::class)->whereNull('application_id');
+        return $this->hasMany(UserTraining::class);
     }
 
     /**
@@ -116,7 +116,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function languageProficiencies(): HasMany
     {
-        return $this->hasMany(LanguageProficiency::class)->whereNull('application_id');
+        return $this->hasMany(LanguageProficiency::class);
     }
 
     /**
@@ -124,7 +124,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function referees(): HasMany
     {
-        return $this->hasMany(Referee::class)->whereNull('application_id');
+        return $this->hasMany(Referee::class);
     }
 
     /**

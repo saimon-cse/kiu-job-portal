@@ -9,11 +9,11 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             // $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('training_name', 5000)->nullable();
-            $table->string('institute_name', 5000)->nullable();
-            $table->string('period_from', 5000)->nullable();
-            $table->string('period_to', 5000)->nullable();
-            $table->string('document_path', 5000)->nullable();
+            $table->text('training_name')->nullable();
+            $table->text('institute_name')->nullable();
+            $table->text('period_from')->nullable();
+            $table->text('period_to')->nullable();
+            $table->text('document_path')->nullable();
             $table->integer('rank')->nullable()->default(0);
             $table->timestamps();
         });

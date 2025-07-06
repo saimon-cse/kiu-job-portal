@@ -9,12 +9,12 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             // $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('institute_name', 5000)->nullable();
-            $table->string('institute_type', 5000)->nullable(); // e.g., University, College, School, Government/ Autonomous/Private
-            $table->string('post_and_scale', 5000)->nullable();
+            $table->text('institute_name')->nullable();
+            $table->text('institute_type')->nullable(); // e.g., University, College, School, Government/ Autonomous/Private
+            $table->text('post_and_scale')->nullable();
             $table->date('from_date')->nullable();
             $table->date('to_date')->nullable();
-            $table->string('courses_taught')->nullable();
+            $table->text('courses_taught')->nullable();
             $table->timestamps();
         });
     }

@@ -20,10 +20,10 @@ return new class extends Migration
 
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('document_type', 5000)->nullable(); // e.g., CV, Certificate, Transcript
-            $table->string('file_path', 5000)->nullable();
-            $table->string('mime_type', 5000)->nullable();
+            // $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
+            $table->text('document_type')->nullable(); // e.g., CV, Certificate, Transcript
+            $table->text('file_path')->nullable();
+            $table->text('mime_type')->nullable();
             $table->integer('rank')->nullable()->default(0);
 
             $table->timestamps();

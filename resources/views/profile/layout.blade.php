@@ -38,12 +38,12 @@
                         My Documents
                     </x-sidebar-link>
 
-                    <div class="pt-4 mt-4 border-t border-gray-200">
+                    {{-- <div class="pt-4 mt-4 border-t border-gray-200">
                         <x-sidebar-link :href="route('profile.settings')" :active="request()->routeIs('profile.settings')">
                             <i class="fas fa-cog mr-3 w-5 text-center"></i>
                             Account Settings
                         </x-sidebar-link>
-                    </div>
+                    </div> --}}
                 </nav>
             </div>
         </div>

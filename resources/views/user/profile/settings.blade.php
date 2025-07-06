@@ -1,4 +1,4 @@
-<x-profile-layout>
+<x-app-layout>
     {{-- Session Status Messages for password updates --}}
     @if (session('status') === 'password-updated')
          <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6" role="alert">
@@ -13,8 +13,8 @@
         </div>
 
         {{-- Section 2: Delete Account --}}
-        <div class="bg-white p-6 rounded-xl shadow-soft">
+        {{-- <div class="bg-white p-6 rounded-xl shadow-soft">
             @include('profile.partials.delete-user-form')
-        </div>
+        </div> --}}
     </div>
-</x-profile-layout>
+</x-app-layout>

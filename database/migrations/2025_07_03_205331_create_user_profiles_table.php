@@ -2,6 +2,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration {
     public function up(): void {
@@ -9,30 +10,32 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             // $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('full_name_bn', 5000)->nullable();
-            $table->string('full_name_en', 5000)->nullable();
-            $table->string('father_name_bn', 5000)->nullable();
-            $table->string('father_name_en', 5000)->nullable();
-            $table->string('mother_name_en', 5000)->nullable();
-            $table->string('mother_name_bn', 5000)->nullable();
-            $table->string('spouse_name_en', 5000)->nullable();
-            $table->string('spouse_name_bn', 5000)->nullable();
+            $table->text('full_name_bn')->nullable();
+            $table->text('full_name_en')->nullable();
+            $table->text('father_name_bn')->nullable();
+            $table->text('father_name_en')->nullable();
+            $table->text('mother_name_en')->nullable();
+            $table->text('mother_name_bn')->nullable();
+            $table->text('spouse_name_en')->nullable();
+            $table->text('spouse_name_bn')->nullable();
             $table->date('dob')->nullable();
-            $table->string('place_of_birth', 5000)->nullable();
-            $table->string('nationality', 5000)->nullable()->default('Bangladeshi');
-            $table->string('religion', 5000)->nullable();
-            $table->string('marital_status', 5000)->nullable();
-            $table->string('permanent_address_bn', 5000)->nullable();
-            $table->string('permanent_address_en', 5000)->nullable();
-            $table->string('present_address_bn', 5000)->nullable();
-            $table->string('present_address_en', 5000)->nullable();
-            $table->string('phone_mobile', 5000)->nullable();
-            // $table->string('phone_mobile');
-            $table->string('additional_information', 5000)->nullable();
-            $table->string('quota_information', 5000)->nullable();
+            $table->text('place_of_birth')->nullable();
+            $table->text('nationality')->nullable()->default('Bangladeshi');
+            $table->text('religion')->nullable();
+            $table->text('marital_status')->nullable();
+            $table->text('permanent_address_bn')->nullable();
+            $table->text('permanent_address_en')->nullable();
+            $table->text('present_address_bn')->nullable();
+            $table->text('present_address_en')->nullable();
+            $table->text('phone_mobile')->nullable();
+            // $table->text('phone_mobile');
+            $table->text('additional_information')->nullable();
+            $table->text('quota_information')->nullable();
             $table->integer('rank')->nullable()->default(0);
             $table->timestamps();
         });
+
+        // DB::statement('ALTER TABLE user_profiles AUTO_INCREMENT = 1000000;');
     }
     public function down(): void {
         Schema::dropIfExists('user_profiles');

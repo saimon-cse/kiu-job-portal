@@ -10,12 +10,12 @@ return new class extends Migration {
              $table->foreignId('job_id')->nullable()->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             // $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
-            $table->string('name', 5000)->nullable();
-            $table->string('designation',5000)->nullable();
-            $table->string('organization', 5000)->nullable();
-            $table->string('email', 5000)->nullable();
-            $table->string('phone')->nullable();
-            $table->string('address', 5000)->nullable();
+            $table->text('name')->nullable();
+            $table->text('designation')->nullable();
+            $table->text('organization')->nullable();
+            $table->text('email')->nullable();
+            $table->text('phone')->nullable();
+            $table->text('address')->nullable();
             // $table->text('relationship')->nullable();
             $table->integer('rank')->nullable()->default(0);
             $table->timestamps();

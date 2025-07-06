@@ -40,16 +40,27 @@
                     Dashboard
                 </x-sidebar-link>
 
-                                <x-sidebar-link :href="route('profile.preview')" :active="request()->routeIs('profile.preview')">
+                {{-- Link to the Profile Management Area --}}
+                <x-sidebar-link :href="route('profile.edit')" :active="request()->is('profile*') ||
+                    request()->is('education*') ||
+                    request()->is('experience*') ||
+                    request()->is('training*') ||
+                    request()->is('language*') ||
+                    request()->is('referee*') ||
+                    request()->is('document*')">
+                    <i class="fas fa-user-edit mr-3 w-5 text-center"></i>
+                    Manage My Profile
+                </x-sidebar-link>
+
+
+                <x-sidebar-link :href="route('profile.preview')" :active="request()->routeIs('profile.preview')">
                     <i class="fas fa-eye mr-3 w-5 text-center"></i>
                     Preview My Profile
                 </x-sidebar-link>
 
-
-                {{-- Link to the Profile Management Area --}}
-                <x-sidebar-link :href="route('profile.edit')" :active="request()->is('profile*') || request()->is('education*') || request()->is('experience*') || request()->is('training*') || request()->is('language*') || request()->is('referee*') || request()->is('document*')">
-                    <i class="fas fa-user-edit mr-3 w-5 text-center"></i>
-                    Manage My Profile
+                <x-sidebar-link :href="route('profile.settings')" :active="request()->routeIs('profile.settings')">
+                    <i class="fas fa-cog mr-3 w-5 text-center"></i>
+                    Account Settings
                 </x-sidebar-link>
 
                 {{-- ============================================= --}}
@@ -82,14 +93,14 @@
 
                         {{-- Site Management Dropdown --}}
                         @canany(['manage-settings'])
-                             {{-- <x-sidebar-dropdown title="Site Management" icon="fas fa-cogs" :active="request()->routeIs('admin.settings.*')"> --}}
+                            {{-- <x-sidebar-dropdown title="Site Management" icon="fas fa-cogs" :active="request()->routeIs('admin.settings.*')"> --}}
 
-                                @can('manage-settings')
-                                   <x-sidebar-link :href="route('admin.settings.index')" :active="request()->routeIs('admin.settings.*')">
-                                <i class="fas fa-cog mr-3 w-5 text-center"></i>
-                                Site Settings
-                            </x-sidebar-link>
-                                @endcan
+                            @can('manage-settings')
+                                <x-sidebar-link :href="route('admin.settings.index')" :active="request()->routeIs('admin.settings.*')">
+                                    <i class="fas fa-cog mr-3 w-5 text-center"></i>
+                                    Site Settings
+                                </x-sidebar-link>
+                            @endcan
 
                             {{-- </x-sidebar-dropdown> --}}
                         @endcanany

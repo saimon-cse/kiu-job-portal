@@ -56,7 +56,8 @@ class EducationController extends Controller
             'institution_name' => 'required|string|max:255',
             'passing_year' => 'required|digits:4|integer|min:1950|max:' . date('Y'),
             'gpa_or_cgpa' => 'nullable|string|max:50',
-            'course_studied' => 'nullable|string|max:255',
+            'certificate_path' => 'required|file|mimes:pdf|max:2048',
+            // 'course_studied' => 'nullable|string|max:255',
         ]);
 
         // Create the new education record and automatically associate it with the logged-in user.

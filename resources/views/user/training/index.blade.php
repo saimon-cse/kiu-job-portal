@@ -64,7 +64,7 @@
                 <div class="text-center py-8">
                     <i class="fas fa-certificate text-4xl text-gray-300"></i>
                     <p class="mt-4 text-gray-500">You haven't added any training records yet.</p>
-                    <a href="{{ route('training.create') }}" class="mt-4 inline-block text-primary-600 hover:underline">Click here to add one.</a>
+                    {{-- <a href="{{ route('training.create') }}" class="mt-4 inline-block text-primary-600 hover:underline">Click here to add one.</a> --}}
                 </div>
             @endforelse
         </div>
