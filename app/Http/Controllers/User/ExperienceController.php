@@ -5,13 +5,14 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\UserExperience;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExperienceController extends Controller
 {
     public function index()
     {
         $this->authorize('viewAny', UserExperience::class);
-        $experiences = auth()->user()->experiences()->latest()->get();
+        $experiences = Auth::user()->experiences()->orderBy('rank', 'asc')->get();
         return view('user.experience.index', compact('experiences'));
     }
 
@@ -63,5 +64,36 @@ class ExperienceController extends Controller
         $this->authorize('delete', $experience);
         $experience->delete();
         return redirect()->route('experience.index')->with('success', 'Work experience deleted successfully.');
+    }
+
+      /**
+     * Reorder the experience records based on a new order of IDs.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function reorder(Request $request)
+    {
+        // Authorize that the user can generally manage their experience records.
+        $this->authorize('create', UserExperience::class);
+
+        $request->validate([
+            'order' => 'required|array',
+            'order.*' => 'integer',
+        ]);
+
+        $user = Auth::user();
+
+        // Loop through the received order array from the drag-and-drop
+        foreach ($request->order as $index => $experienceId) {
+            // Update the rank for each experience record belonging to the current user
+            // The index (0, 1, 2...) becomes the new rank.
+            $user->experiences()
+                 ->where('id', $experienceId)
+                 ->update(['rank' => $index]);
+        }
+
+        // Return a JSON response to the JavaScript fetch call
+        return response()->json(['status' => 'success', 'message' => 'Experience order updated successfully.']);
     }
 }

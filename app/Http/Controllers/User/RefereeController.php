@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Referee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RefereeController extends Controller
 {
@@ -13,6 +14,32 @@ class RefereeController extends Controller
         $this->authorize('viewAny', Referee::class);
         $referees = auth()->user()->referees()->orderBy('rank')->get();
         return view('user.referee.index', compact('referees'));
+    }
+
+     /**
+     * Reorder the referee records based on a new order of IDs.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function reorder(Request $request)
+    {
+        $this->authorize('create', Referee::class);
+
+        $request->validate([
+            'order' => 'required|array',
+            'order.*' => 'integer',
+        ]);
+
+        $user = Auth::user();
+
+        foreach ($request->order as $index => $refereeId) {
+            $user->referees()
+                 ->where('id', $refereeId)
+                 ->update(['rank' => $index]);
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Referee order updated successfully.']);
     }
 
     public function create()

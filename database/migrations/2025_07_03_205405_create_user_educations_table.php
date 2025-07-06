@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->text('gpa_or_cgpa')->nullable();
             $table->text('passing_year')->nullable();
             $table->text('document_path')->nullable();
+            // $table->integer('rank')->nullable()->default(0);
             // $table->text('course_studied')->nullable();
             $table->integer('rank')->nullable()->default(0);
             $table->timestamps();

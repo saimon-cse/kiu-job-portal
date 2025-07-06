@@ -70,6 +70,8 @@ class ProfileController extends Controller
             'present_address_bn' => 'nullable|string',
             'present_address_en' => 'nullable|string',
             'phone_mobile' => 'nullable|string|max:20',
+            'additional_information' => 'nullable|string',
+            'quota_information' => 'nullable|string',
         ]);
 
         // --- NEW: SAVE THE EXTENDED PROFILE DATA ---

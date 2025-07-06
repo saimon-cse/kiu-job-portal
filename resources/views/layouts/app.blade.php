@@ -47,6 +47,23 @@
     <!-- Alpine.js (for UI interactivity) -->
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+<style>
+     .sortable-item {
+            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        /* --- ADD THIS NEW CLASS --- */
+        /* This class will be applied to the placeholder item while dragging */
+        .sortable-ghost {
+            background-color: #e0f2fe; /* This is the hex code for primary-100 */
+            opacity: 0.5;
+        }
+</style>
+
+
+    <!-- SortableJS (for drag-and-drop) -->
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+
     <!-- SweetAlert2 (for beautiful pop-ups/modals) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

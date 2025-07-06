@@ -28,9 +28,30 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(
 
 });
 
+use App\Http\Controllers\Admin\PublicationTypeController;
+
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
+
+    Route::middleware(['can:manage-publication-types'])->group(function () {
+        Route::resource('publication-types', PublicationTypeController::class)->except(['show']);
+    });
+});
+
 
 
 // A route protected by a role
 Route::middleware(['auth', 'verified', 'role:admin|super-admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+});
+
+use App\Http\Controllers\Admin\CircularController;
+// ...
+
+Route::middleware(['auth', 'verified', 'can:manage-circulars'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::resource('circulars', CircularController::class);
+
 });

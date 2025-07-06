@@ -47,6 +47,8 @@
                     request()->is('training*') ||
                     request()->is('language*') ||
                     request()->is('referee*') ||
+                    request()->is('publication*') ||
+                    request()->is('award*') ||
                     request()->is('document*')">
                     <i class="fas fa-user-edit mr-3 w-5 text-center"></i>
                     Manage My Profile
@@ -89,6 +91,26 @@
                                 @endcan
 
                             </x-sidebar-dropdown>
+                        @endcanany
+
+                        @canany(['manage-circulars', 'manage-jobs'])
+                            <x-sidebar-dropdown title="Job Management" icon="fas fa-briefcase" :active="request()->routeIs('admin.circulars.*')">
+
+                                @can('manage-circulars')
+                                    <x-sidebar-link :href="route('admin.circulars.index')" :active="request()->routeIs('admin.circulars.*')">
+                                        Circulars & Posts
+                                    </x-sidebar-link>
+                                @endcan
+
+                            </x-sidebar-dropdown>
+
+                        @can('manage-publication-types')
+                            <x-sidebar-link :href="route('admin.publication-types.index')" :active="request()->routeIs('admin.publication-types.*')">
+                                <i class="fas fa-book-open mr-3 w-5 text-center"></i>
+                                Publication Types
+                            </x-sidebar-link>
+                        @endcan
+
                         @endcanany
 
                         {{-- Site Management Dropdown --}}

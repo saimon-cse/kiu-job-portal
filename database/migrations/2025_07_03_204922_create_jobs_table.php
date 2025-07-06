@@ -1,28 +1,26 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
-    public function up(): void {
+class CreateJobsTable extends Migration
+{
+    public function up()
+    {
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('circular_no');
-            $table->string('post_name', 5000)->nullable(false);
+            $table->foreignId('circular_id')->constrained()->onDelete('cascade');
+            $table->string('post_name', 5000);
             $table->string('department_office', 5000)->nullable();
-            $table->text('description')->nullable();
-            $table->date('date')->nullable();
-            $table->string('document_path', 5000)->nullable();
             $table->decimal('application_fee', 8, 2)->default(0);
-            $table->date('last_date_of_submission')->nullable();
-            $table->enum('status', ['open', 'closed', 'archived'])->default('open');
-            $table->unsignedBigInteger('rank')->nullable()->default(0);
-            $table->foreignId('created_by')->constrained('users');
-
+            $table->integer('rank')->default(0);
             $table->timestamps();
         });
     }
-    public function down(): void {
+
+    public function down()
+    {
         Schema::dropIfExists('jobs');
     }
-};
+}

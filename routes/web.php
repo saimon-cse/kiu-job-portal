@@ -14,8 +14,9 @@ use App\Http\Controllers\User\LanguageController;
 use App\Http\Controllers\User\RefereeController;
 use App\Http\Controllers\User\TrainingController;
 use App\Http\Controllers\User\DocumentController;
+use App\Http\Controllers\User\AwardController;
 use App\Http\Controllers\User\SettingsController as UserSettingsController;
-
+// use App\Http\Controllers\User\PublicationController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,11 +39,10 @@ Route::get('/dashboard', function () {
 
 // routes/web.php
 Route::middleware('auth')->group(function () {
-       // --- Personal Information / Profile Routes ---
+    // --- Personal Information / Profile Routes ---
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
-    // THIS IS THE MISSING ROUTE. ADD THIS LINE:
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
@@ -62,23 +62,41 @@ Route::middleware('auth')->group(function () {
 
     // Manages Education records (List, Create, Edit, Delete)
     Route::resource('education', EducationController::class)->except(['show']);
-
+    Route::post('/education/reorder', [EducationController::class, 'reorder'])->name('education.reorder');
     // Manages Work Experience records
     Route::resource('experience', ExperienceController::class)->except(['show']);
-
+    Route::post('/experience/reorder', [ExperienceController::class, 'reorder'])->name('experience.reorder');
     // Manages Publication records
     Route::resource('publication', PublicationController::class)->except(['show']);
 
     // Manages Language Proficiency records
     Route::resource('language', LanguageController::class)->except(['show']);
-
+    Route::post('/languages/reorder', [LanguageController::class, 'reorder'])->name('language.reorder');
     // Manages Referee records
     Route::resource('referee', RefereeController::class)->except(['show']);
-
+    Route::post('/referees/reorder', [RefereeController::class, 'reorder'])->name('referee.reorder');
     // Manages Training records
     Route::resource('training', TrainingController::class)->except(['show']);
+    Route::post('/training/reorder', [TrainingController::class, 'reorder'])->name('training.reorder');
+
+
+    Route::resource('award', AwardController::class)->except(['show']);
+
+    // The route to handle the reordering post request for awards
+    Route::post('/awards/reorder', [AwardController::class, 'reorder'])->name('award.reorder');
 
     // Manages Document records
     Route::resource('document', DocumentController::class)->except(['show']);
+});
 
+
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    // ... your other user routes (dashboard, profile, education, etc.)
+
+    // Add this line for publication management
+    Route::resource('publication', PublicationController::class)->except(['show']);
+    Route::post('/publications/reorder', [PublicationController::class, 'reorder'])->name('publication.reorder');
 });

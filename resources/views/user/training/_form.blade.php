@@ -5,7 +5,7 @@
         <label for="training_name" class="block text-sm font-medium text-gray-700">Training Name</label>
         <div class="mt-1">
             <input type="text" name="training_name" id="training_name" value="{{ old('training_name', isset($training) ? $training->training_name : '') }}" required
-                   placeholder="e.g., Advanced Laravel Development"
+                   {{-- placeholder="e.g., Advanced Laravel Development" --}}
                    class="block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
         </div>
     </div>
@@ -15,7 +15,7 @@
         <label for="institute_name" class="block text-sm font-medium text-gray-700">Institute Name</label>
         <div class="mt-1">
             <input type="text" name="institute_name" id="institute_name" value="{{ old('institute_name', isset($training) ? $training->institute_name : '') }}" required
-                   placeholder="e.g., Laracasts"
+                   {{-- placeholder="e.g., Laracasts" --}}
                    class="block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
         </div>
     </div>

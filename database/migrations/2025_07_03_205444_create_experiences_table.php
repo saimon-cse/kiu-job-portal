@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->text('post_and_scale')->nullable();
             $table->date('from_date')->nullable();
             $table->date('to_date')->nullable();
+            $table->integer('rank')->nullable()->default(0);
             $table->text('courses_taught')->nullable();
             $table->timestamps();
         });

@@ -22,7 +22,7 @@ class EducationController extends Controller
 
         // Get all education records that belong to the currently logged-in user.
         // We use the 'educations' relationship defined in the User model.
-        $educations = Auth::user()->educations()->latest()->get();
+        $educations = Auth::user()->educations()->OrderBy('rank', 'asc')->get();
 
         return view('user.education.index', compact('educations'));
     }
@@ -56,7 +56,7 @@ class EducationController extends Controller
             'institution_name' => 'required|string|max:255',
             'passing_year' => 'required|digits:4|integer|min:1950|max:' . date('Y'),
             'gpa_or_cgpa' => 'nullable|string|max:50',
-            'certificate_path' => 'required|file|mimes:pdf|max:2048',
+            'document_path' => 'required|max:2048',
             // 'course_studied' => 'nullable|string|max:255',
         ]);
 
@@ -107,6 +107,38 @@ class EducationController extends Controller
 
         return redirect()->route('education.index')->with('success', 'Education record updated successfully.');
     }
+
+     /**
+     * Reorder the education records based on a new order of IDs.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function reorder(Request $request)
+    {
+        // Authorize that the user can generally manage their education records.
+        $this->authorize('create', UserEducation::class);
+
+        $request->validate([
+            'order' => 'required|array',
+            'order.*' => 'integer', // Ensure every item in the array is an integer ID
+        ]);
+
+        $user = Auth::user();
+
+        // Loop through the received order array from the drag-and-drop
+        foreach ($request->order as $index => $educationId) {
+            // Update the rank for each education record belonging to the current user
+            // The index (0, 1, 2...) becomes the new rank.
+            $user->educations()
+                 ->where('id', $educationId)
+                 ->update(['rank' => $index]);
+        }
+
+        // Return a JSON response to the JavaScript fetch call
+        return response()->json(['status' => 'success', 'message' => 'Education order updated successfully.']);
+    }
+
 
     /**
      * Remove the specified education record from storage.

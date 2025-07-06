@@ -21,7 +21,7 @@ class TrainingController extends Controller
         $this->authorize('viewAny', UserTraining::class);
 
         // Get all training records belonging to the authenticated user.
-        $trainings = Auth::user()->trainings()->latest()->get();
+        $trainings = Auth::user()->trainings()->orderBy('rank')->get();
 
         return view('user.training.index', compact('trainings'));
     }
@@ -139,5 +139,34 @@ class TrainingController extends Controller
         $training->delete();
 
         return redirect()->route('training.index')->with('success', 'Training record deleted successfully.');
+    }
+
+     /**
+     * --- NEW METHOD: To handle the drag-and-drop reordering ---
+     */
+ /**
+     * Reorder the training records based on a new order of IDs.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function reorder(Request $request)
+    {
+        $this->authorize('create', UserTraining::class);
+
+        $request->validate([
+            'order' => 'required|array',
+            'order.*' => 'integer',
+        ]);
+
+        $user = Auth::user();
+
+        foreach ($request->order as $index => $trainingId) {
+            $user->trainings()
+                 ->where('id', $trainingId)
+                 ->update(['rank' => $index]);
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Training order updated successfully.']);
     }
 }

@@ -26,6 +26,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'submit-applications',
             'view-own-applications',
             'edit-own-profile',
+                'manage-circulars',
 
             // Admin Permissions
             'manage-jobs',          // A catch-all for job-related tasks
@@ -33,6 +34,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'update-application-status',
             'manage-users',         // For general user management (not other admins)
 
+            'manage-publication-types',
+            // 'manage-publications',
             // Super Admin Permissions
             'manage-settings',
             'manage-roles',         // Ability to manage roles and permissions themselves
@@ -60,6 +63,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'view-all-applications',
             'update-application-status',
             'manage-users',
+                'manage-circulars',
+            'manage-publication-types',
         ]);
 
         // Role: Super Admin

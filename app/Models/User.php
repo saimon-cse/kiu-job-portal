@@ -6,132 +6,93 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-// 2. IMPLEMENT THE CONTRACT IN THE CLASS DEFINITION
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'profile_picture',
-        'isActive',
-        'suspended_at',
+        'name', 'email', 'password', 'profile_picture', 'isActive', 'suspended_at',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = [ 'password', 'remember_token', ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
-        // This 'email_verified_at' cast is essential for the verification system
         'email_verified_at' => 'datetime',
-        'suspended_at' => 'datetime',
         'isActive' => 'boolean',
-        // 'password' => 'hashed',
+        'suspended_at' => 'datetime',
     ];
 
-    // --- RELATIONSHIPS (No changes needed here) ---
+    // --- RELATIONSHIPS FOR LIVE DATA ---
 
-    /**
-     * A user's main profile is the one not tied to a specific application.
-     */
-    public function profile(): HasOne
+    public function profile()
     {
         return $this->hasOne(UserProfile::class);
     }
 
-    /**
-     * A user can submit many applications.
-     */
-    public function applications(): HasMany
-    {
-        return $this->hasMany(Application::class);
-    }
-
-    /**
-     * A user has a set of education records not tied to an application.
-     */
-    public function educations(): HasMany
+    public function educations()
     {
         return $this->hasMany(UserEducation::class);
     }
 
-    /**
-     * A user has a set of experience records not tied to an application.
-     */
-    public function experiences(): HasMany
+    public function experiences()
     {
         return $this->hasMany(UserExperience::class);
     }
 
-    /**
-     * A user has a set of publications not tied to an application.
-     */
-    public function publications(): HasMany
+    public function publications()
     {
-        return $this->hasMany(Publication::class);
+        return $this->hasMany(UserPublication::class);
     }
 
-    /**
-     * A user has a set of documents not tied to an application.
-     */
-    public function documents(): HasMany
-    {
-        return $this->hasMany(UserDocument::class);
-    }
+    public function awards()
+{
+    return $this->hasMany(UserAward::class);
+}
 
-    /**
-     * A user has a set of trainings not tied to an application.
-     */
-    public function trainings(): HasMany
-    {
-        return $this->hasMany(UserTraining::class);
-    }
-
-    /**
-     * A user has a set of language proficiencies not tied to an application.
-     */
-    public function languageProficiencies(): HasMany
+    public function languageProficiencies()
     {
         return $this->hasMany(LanguageProficiency::class);
     }
 
-    /**
-     * A user has a set of referees not tied to an application.
-     */
-    public function referees(): HasMany
+    public function referees()
     {
         return $this->hasMany(Referee::class);
     }
 
-    /**
-     * A user (admin) can create many jobs.
-     */
-    public function createdJobs(): HasMany
+    public function trainings()
     {
-        return $this->hasMany(Job::class, 'created_by');
+        return $this->hasMany(UserTraining::class);
     }
+
+    public function documents()
+    {
+        return $this->hasMany(UserDocument::class);
+    }
+
+    // --- RELATIONSHIPS FOR APPLICATIONS ---
+
+    public function jobApplications()
+    {
+        return $this->hasMany(JobApplication::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function hasAppliedFor($jobId)
+    {
+        return $this->jobApplications()->where('job_id', $jobId)->exists();
+    }
+
+    // public function createdJobApplications()
+    // {
+    //     return $this->hasMany(JobApplication::class, 'created_by');
+    // }
+
+    // --- RELATIONSHIPS FOR HISTORY ---
+
 }

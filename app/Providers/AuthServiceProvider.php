@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
+use App\Models\UserAward;
+use App\Policies\UserAwardPolicy;
 
 use App\Models\{
     UserEducation,
@@ -12,7 +14,10 @@ use App\Models\{
     LanguageProficiency,
     Referee,
     UserTraining,
-    UserDocument
+    UserDocument,
+    UserPublication,
+
+
 };
 use App\Policies\{
     UserEducationPolicy,
@@ -21,7 +26,8 @@ use App\Policies\{
     LanguageProficiencyPolicy,
     RefereePolicy,
     UserTrainingPolicy,
-    UserDocumentPolicy
+    UserDocumentPolicy,
+    UserPublicationPolicy
 };
 
 
@@ -42,6 +48,8 @@ class AuthServiceProvider extends ServiceProvider
         Referee::class => RefereePolicy::class,
         UserTraining::class => UserTrainingPolicy::class,
         UserDocument::class => UserDocumentPolicy::class,
+        UserPublication::class => UserPublicationPolicy::class,
+        UserAward::class => UserAwardPolicy::class,
     ];
 
     /**

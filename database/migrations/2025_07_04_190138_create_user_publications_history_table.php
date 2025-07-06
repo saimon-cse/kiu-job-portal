@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('publication_type_id')->constrained()->onDelete('cascade');
             $table->text('title')->nullable();
+            $table->text('doi')->nullable();
             $table->integer('rank')->nullable()->default(0);
             $table->timestamps();
         });
