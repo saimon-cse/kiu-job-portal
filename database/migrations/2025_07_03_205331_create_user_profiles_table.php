@@ -28,6 +28,7 @@ return new class extends Migration {
             $table->text('present_address_bn')->nullable();
             $table->text('present_address_en')->nullable();
             $table->text('phone_mobile')->nullable();
+            $table->text('signature_path')->nullable();
             // $table->text('phone_mobile');
             $table->text('additional_information')->nullable();
             $table->text('quota_information')->nullable();

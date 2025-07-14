@@ -1,9 +1,9 @@
 <x-app-layout>
-    {{-- Page Header --}}
+
     <div class="mb-6 flex flex-col md:flex-row justify-between items-center">
         <div>
             <h1 class="text-2xl font-bold text-gray-800">Circulars & Job Posts</h1>
-            <p class="text-gray-500">Manage all job circulars and their associated posts.</p>
+            <p class="text-gray-500">Manage all job circulars and view application counts.</p>
         </div>
         <a href="{{ route('admin.circulars.create') }}" class="w-full md:w-auto mt-4 md:mt-0 bg-primary-600 hover:bg-primary-700 text-white py-2 px-4 rounded-lg font-medium text-center">
             <i class="fas fa-plus mr-2"></i> Add New Circular
@@ -18,10 +18,10 @@
             <table class="w-full text-sm text-left text-gray-600">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                     <tr>
-                        <th scope="col" class="px-6 py-3">Circular No.</th>
-                        <th scope="col" class="px-6 py-3">Post Date</th>
-                        <th scope="col" class="px-6 py-3">Last Date</th>
+                        <th scope="col" class="px-6 py-3">Circular Details</th>
+                        <th scope="col" class="px-6 py-3">Dates</th>
                         <th scope="col" class="px-6 py-3 text-center">Posts</th>
+                        <th scope="col" class="px-6 py-3 text-center">Applications</th>
                         <th scope="col" class="px-6 py-3">Status</th>
                         <th scope="col" class="px-6 py-3 text-right">Actions</th>
                     </tr>
@@ -29,22 +29,33 @@
                 <tbody>
                     @forelse ($circulars as $circular)
                         <tr class="bg-white border-b hover:bg-primary-50">
-                            {{-- Circular No --}}
+                            {{-- Circular Details --}}
                             <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                 <p class="font-semibold">{{ $circular->circular_no }}</p>
-                                <p class="text-xs text-gray-500">Created by: {{ $circular->creator->name }}</p>
+                                <p class="text-xs text-gray-500">
+                                    Created by:
+                                    {{-- Safely access the creator's name --}}
+                                    {{ isset($circular->creator) ? $circular->creator->name : 'N/A' }}
+                                </p>
                             </td>
-                            {{-- Post Date --}}
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                {{ $circular->post_date->format('d M, Y') }}
-                            </td>
-                            {{-- Last Date --}}
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                {{ $circular->last_date_of_submission->format('d M, Y') }}
+                            {{-- Dates --}}
+                            <td class="px-6 py-4 whitespace-nowrap text-xs">
+                                <div>
+                                    <span class="font-semibold text-gray-500">Post:</span>
+                                    <span>{{ $circular->post_date->format('d M, Y') }}</span>
+                                </div>
+                                <div class="mt-1">
+                                    <span class="font-semibold text-red-500">Last:</span>
+                                    <span>{{ $circular->last_date_of_submission->format('d M, Y') }}</span>
+                                </div>
                             </td>
                             {{-- Number of Posts --}}
-                            <td class="px-6 py-4 text-center font-bold">
-                                {{ $circular->jobs_count }}
+                            <td class="px-6 py-4 text-center">
+                                <span class="text-lg font-bold text-gray-800">{{ $circular->jobs_count }}</span>
+                            </td>
+                            {{-- Number of Applications --}}
+                            <td class="px-6 py-4 text-center">
+                                <span class="text-lg font-bold text-primary-700">{{ $circular->job_applications_count }}</span>
                             </td>
                             {{-- Status Badge --}}
                             <td class="px-6 py-4">
@@ -59,14 +70,12 @@
                             {{-- Action Buttons --}}
                             <td class="px-6 py-4">
                                 <div class="flex items-center justify-end space-x-2">
-                                    {{-- Edit Button --}}
                                     <div class="relative group">
                                         <a href="{{ route('admin.circulars.edit', $circular) }}" class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 hover:bg-primary-100 text-primary-600">
                                             <i class="fas fa-pencil-alt"></i>
                                         </a>
                                         <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-800 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible pointer-events-none">Edit</span>
                                     </div>
-                                    {{-- Delete Button --}}
                                     <div class="relative group">
                                         <form action="{{ route('admin.circulars.destroy', $circular) }}" method="POST" onsubmit="return confirm('Are you sure? This will delete the circular and ALL its associated job posts.');">
                                             @csrf
@@ -93,7 +102,7 @@
             </table>
         </div>
         {{-- Pagination Links --}}
-        <div class="mt-4">
+        <div class="mt-6">
             {{ $circulars->links() }}
         </div>
     </div>

@@ -23,6 +23,11 @@
             Personal Information
         </x-sidebar-link>
 
+        <x-sidebar-link :href="route('images.index')" :active="request()->routeIs('images.index')">
+            <i class="fas fa-camera mr-3 w-5 text-center"></i>
+            Picture & Signature
+        </x-sidebar-link>
+
         <x-sidebar-link :href="route('education.index')" :active="request()->routeIs('education.*')">
             <i class="fas fa-graduation-cap mr-3 w-5 text-center"></i>
             Education

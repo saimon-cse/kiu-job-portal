@@ -9,6 +9,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             // $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('job_id')->nullable()->constrained()->onDelete('cascade');
             $table->text('training_name')->nullable();
             $table->text('institute_name')->nullable();
             $table->text('period_from')->nullable();

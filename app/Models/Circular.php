@@ -30,4 +30,24 @@ class Circular extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+
+        /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'circular_no'; // Use the 'circular_no' column for route model binding.
+    }
+
+    /**
+     * Get all of the job applications for the circular through its jobs.
+     * This defines the indirect relationship.
+     */
+    public function jobApplications()
+    {
+        return $this->hasManyThrough(ApplicationHistory::class, Job::class);
+    }
+
 }

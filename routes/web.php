@@ -28,9 +28,16 @@ use App\Http\Controllers\User\SettingsController as UserSettingsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\PublicCircularController;
+use App\Http\Controllers\JobApplicationController;
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [PublicCircularController::class, 'index'])->name('index');
+Route::get('/circulars', [PublicCircularController::class, 'index'])->name('circulars.index');
+Route::get('/circulars/{circular:circular_no}', [PublicCircularController::class, 'show'])->name('circulars.show');
+//  Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'store'])->name('jobs.apply');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -90,13 +97,98 @@ Route::middleware('auth')->group(function () {
 });
 
 
+use App\Http\Controllers\User\ImageManagementController;
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    // ... your other user routes (dashboard, profile, education, etc.)
+    Route::get('/manage-images', [ImageManagementController::class, 'index'])->name('images.index');
+    Route::post('/manage-images', [ImageManagementController::class, 'store'])->name('images.store');
+});
 
-    // Add this line for publication management
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('publication', PublicationController::class)->except(['show']);
     Route::post('/publications/reorder', [PublicationController::class, 'reorder'])->name('publication.reorder');
 });
+
+
+use App\Http\Controllers\PaymentController;
+// ...
+
+// Routes for authenticated users
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     // ...
+//     Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
+//     Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
+// });
+
+// // Routes for payment gateway callbacks (these must be outside CSRF protection)
+// Route::post('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+// Route::post('/payment/failure', [PaymentController::class, 'failure'])->name('payment.failure');
+// Route::post('/payment/ipn', [PaymentController::class, 'ipn'])->name('payment.ipn'); // Instant Payment Notification
+
+
+use App\Http\Controllers\User\ApplicationHistoryController;
+// ... (other use statements)
+
+Route::middleware(['auth', 'verified'])->group(function () {
+
+    // ... (dashboard, profile, and all other user routes) ...
+
+Route::get('/my-applications', ApplicationHistoryController::class)->name('applications.history.index');
+    // The 'jobs.apply' route and payment routes remain the same
+    Route::post('/jobs/{job}/apply', [JobApplicationController::class, 'store'])->name('jobs.apply');
+    // Route::get('/payment/create', [PaymentController::class, 'create'])->name('payment.create');
+    // Route::post('/payment', [PaymentController::class, 'store'])->name('payment.store');
+});
+
+
+
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::post('/payment/pay/{application}', [PaymentController::class, 'pay'])->name('payment.pay');
+// });
+
+// use App\Http\Controllers\PaymentController;
+
+// This route must be accessible to logged-in users to start the payment
+
+// This route must be accessible to logged-in users to start the payment
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Correctly pass the {application} which is an ApplicationHistory instance
+    Route::get('/payment/pay/{application}', [PaymentController::class, 'pay'])->name('payment.pay');
+});
+
+// Route::get('/success', function(){
+//     return view('payment.success');
+// });
+// It can be named anything, e.g., 'payment.return' or 'payment.thankyou'.
+Route::get('/success', [PaymentController::class, 'success'])->name('payment.success');
+
+// 2. The routes the SSLCOMMERZ SERVER will POST to. These handle the logic.
+// They MUST be outside any auth middleware and CSRF protection.
+// Route::post('/payment/success', [PaymentController::class, 'success'])->name('payment.success.webhook');
+
+// These callback routes MUST be outside any auth middleware and CSRF protection.
+// Route::post('/payment/success', [PaymentController::class, 'success'])->name('payment.success');
+Route::post('/payment/fail', [PaymentController::class, 'fail'])->name('payment.fail');
+Route::post('/payment/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+Route::post('/payment/ipn', [PaymentController::class, 'ipn'])->name('payment.ipn');
+Route::post('/pay-via-ajax', [App\Http\Controllers\PaymentController::class, 'payViaAjax'])->name('payment.ajax');
+use App\Http\Controllers\SslCommerzPaymentController;
+
+
+// // SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+// Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+// Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+// Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+// Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+// Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+// Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END

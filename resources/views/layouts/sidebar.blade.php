@@ -40,6 +40,11 @@
                     Dashboard
                 </x-sidebar-link>
 
+                <x-sidebar-link :href="route('circulars.index')" :active="request()->routeIs('circulars.*')">
+                    <i class="fas fa-search mr-3 w-5 text-center"></i>
+                    Available Jobs
+                </x-sidebar-link>
+
                 {{-- Link to the Profile Management Area --}}
                 <x-sidebar-link :href="route('profile.edit')" :active="request()->is('profile*') ||
                     request()->is('education*') ||
@@ -59,6 +64,12 @@
                     <i class="fas fa-eye mr-3 w-5 text-center"></i>
                     Preview My Profile
                 </x-sidebar-link>
+
+{{-- FIND THIS LINK IN YOUR SIDEBAR --}}
+<x-sidebar-link :href="route('applications.history.index')" :active="request()->routeIs('applications.history.index')">
+    <i class="fas fa-file-alt mr-3 w-5 text-center"></i>
+    My Applications
+</x-sidebar-link>
 
                 <x-sidebar-link :href="route('profile.settings')" :active="request()->routeIs('profile.settings')">
                     <i class="fas fa-cog mr-3 w-5 text-center"></i>
@@ -104,13 +115,12 @@
 
                             </x-sidebar-dropdown>
 
-                        @can('manage-publication-types')
-                            <x-sidebar-link :href="route('admin.publication-types.index')" :active="request()->routeIs('admin.publication-types.*')">
-                                <i class="fas fa-book-open mr-3 w-5 text-center"></i>
-                                Publication Types
-                            </x-sidebar-link>
-                        @endcan
-
+                            @can('manage-publication-types')
+                                <x-sidebar-link :href="route('admin.publication-types.index')" :active="request()->routeIs('admin.publication-types.*')">
+                                    <i class="fas fa-book-open mr-3 w-5 text-center"></i>
+                                    Publication Types
+                                </x-sidebar-link>
+                            @endcan
                         @endcanany
 
                         {{-- Site Management Dropdown --}}

@@ -88,7 +88,14 @@
             <main class="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
                 {{-- @include('partials._session-messages')
                 @include('partials._validation-errors') --}}
-                {{ $slot }}
+                @if (isset($slot) && $slot->isNotEmpty())
+                    {{ $slot }}
+                @elseif (View::hasSection('content'))
+                @yield('content')
+
+                @endif
+                {{-- {{ $slot }} --}}
+
             </main>
         </div>
     </div>

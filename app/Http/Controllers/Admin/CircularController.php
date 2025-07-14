@@ -14,7 +14,10 @@ class CircularController extends Controller
     public function index()
     {
         $this->authorize('manage-circulars');
-        $circulars = Circular::withCount('jobs')->latest()->paginate(10);
+         $circulars = Circular::withCount(['jobs', 'jobApplications'])
+            ->with('creator')
+            ->latest('post_date')
+            ->paginate(10);
         return view('admin.circulars.index', compact('circulars'));
     }
 

@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->date('from_date')->nullable();
             $table->date('to_date')->nullable();
             $table->text('courses_taught')->nullable();
+            $table->text('rank')->nullable(); // e.g., Professor, Associate Professor, Assistant Professor, Lecturer
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             // $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignId('job_id')->nullable()->constrained()->onDelete('cascade');
             $table->text('document_type')->nullable(); // e.g., CV, Certificate, Transcript
             $table->text('file_path')->nullable();
             $table->text('mime_type')->nullable();

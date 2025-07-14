@@ -16,7 +16,7 @@ class CreateUserAwardsTable extends Migration
         Schema::create('user_awards', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-
+$table->foreignId('job_id')->nullable()->constrained()->onDelete('cascade');
             $table->string('award_name')->nullable();
             $table->string('awarding_body')->nullable(); // The organization that gave the award
             $table->year('year_received')->nullable();
