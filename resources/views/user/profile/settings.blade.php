@@ -7,6 +7,11 @@
     @endif
 
     <div class="space-y-8">
+
+        <div class="bg-white p-6 rounded-xl shadow-soft">
+            @include('profile.partials.update-profile-information-form')
+        </div>
+
         {{-- Section 1: Update Password --}}
         <div class="bg-white p-6 rounded-xl shadow-soft">
              @include('profile.partials.update-password-form')

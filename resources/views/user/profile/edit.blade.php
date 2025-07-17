@@ -16,10 +16,10 @@
         @method('patch')
 
         <div class="space-y-8">
-            {{-- Section 1: Core Account Info --}}
-            <div class="bg-white p-6 rounded-xl shadow-soft">
+            <!-- Section 1: Core Account Info -->
+            {{-- <div class="bg-white p-6 rounded-xl shadow-soft">
                 @include('profile.partials.update-profile-information-form')
-            </div>
+            </div> --}}
 
             {{-- Section 2: Detailed Personal Information --}}
             <div class="bg-white p-6 rounded-xl shadow-soft">
@@ -124,6 +124,16 @@
                     <div class="md:col-span-2">
                         <label for="quota_information" class="block text-sm font-medium text-gray-700">Quota Information (if any)</label>
                         <textarea id="quota_information" name="quota_information" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm">{{ old('quota_information', $userProfile->quota_information) }}</textarea>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="service_obligation_details" class="block text-sm font-medium text-gray-700">Service Obligation Details (if any)</label>
+                        <textarea id="service_obligation_details" name="service_obligation_details" rows="2" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm">{{ old('service_obligation_details', $userProfile->service_obligation_details) }}</textarea>
+                    </div>
+
+                    <div class="md:col-span-2">
+                        <label for="dismissal_reason" class="block text-sm font-medium text-gray-700">Dismissable Reason (if any)</label>
+                        <textarea id="dismissal_reason" name="dismissal_reason" rows="2" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm">{{ old('dismissal_reason', $userProfile->dismissal_reason) }}</textarea>
                     </div>
                 </div>
             </div>

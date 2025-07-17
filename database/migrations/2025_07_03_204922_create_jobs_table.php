@@ -17,6 +17,9 @@ class CreateJobsTable extends Migration
             $table->integer('rank')->default(0);
             $table->timestamps();
         });
+
+        // Set auto-increment start value
+        DB::statement("ALTER TABLE circulars AUTO_INCREMENT = 2000000;");
     }
 
     public function down()

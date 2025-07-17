@@ -14,8 +14,8 @@
     </div>
     <div>
         <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
-        <input id="email" name="email" type="email" class="mt-1 block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm" value="{{ old('email', $user->email) }}" required />
-        <x-input-error class="mt-2" :messages="$errors->get('email')" />
+        <input id="email" readonly  type="email" class="mt-1 block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm" value="{{ old('email', $user->email) }}" />
+        {{-- <x-input-error class="mt-2" :messages="$errors->get('email')" /> --}}
 
         @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
             <div class="mt-2">

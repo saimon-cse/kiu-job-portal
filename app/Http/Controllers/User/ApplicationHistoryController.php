@@ -19,10 +19,12 @@ class ApplicationHistoryController extends Controller
     {
         // Fetch all application histories for the logged-in user.
         // Eager load the 'job.circular' relationship to efficiently access deadline and post name.
-        $applications = Auth::user()->applicationHistory()
-            ->with(['job.circular']) // <-- Efficiently load related data
-            ->latest() // Order by the most recent applications first
-            ->paginate(10);
+        $applications = Auth::user()
+            ->applicationHistory()
+            // ->applicationHistories()
+            ->with(['job', 'job.circular'])
+            ->latest()
+            ->paginate(15);
 
         return view('user.applications.index', compact('applications'));
     }

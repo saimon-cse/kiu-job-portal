@@ -86,8 +86,8 @@
 
             <!-- Main Content Area -->
             <main class="flex-1 overflow-y-auto p-4 md:p-6 bg-gray-50">
-                {{-- @include('partials._session-messages')
-                @include('partials._validation-errors') --}}
+                @include('partials._session-messages')
+                @include('partials._validation-errors')
                 @if (isset($slot) && $slot->isNotEmpty())
                     {{ $slot }}
                 @elseif (View::hasSection('content'))
@@ -132,6 +132,8 @@
     </script>
 
     @stack('scripts')
+ <div id="teleport-target"></div>
+
 
 </body>
 </html>

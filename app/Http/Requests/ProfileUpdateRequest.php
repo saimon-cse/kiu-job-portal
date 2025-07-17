@@ -29,7 +29,7 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             // Rules for the 'users' table
-            'name' => ['required', 'string', 'max:255'],
+            // 'name' => ['required', 'string', 'max:255'],
             // The email must be unique, but we need to ignore the current user's own email.
             // 'email' => ['required', 'string', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
 
@@ -55,7 +55,8 @@ class ProfileUpdateRequest extends FormRequest
             'additional_information' => ['nullable', 'string'],
             'quota_information' => ['nullable', 'string'],
             'adittional_information' => ['nullable', 'string'],
-            // 'quota_information' => ['nullable', 'string'],
+            'dismissal_reason' => ['nullable', 'string'],
+            'service_obligation_details' => ['nullable', 'string'],
         ];
     }
 }

@@ -50,4 +50,11 @@ class Circular extends Model
         return $this->hasManyThrough(ApplicationHistory::class, Job::class);
     }
 
+    // NEW: Get applications with a specific status through its jobs
+    public function applicationsWithStatus($status)
+    {
+        return $this->hasManyThrough(ApplicationHistory::class, Job::class)
+                    ->where('applications_history.status', $status);
+    }
+
 }

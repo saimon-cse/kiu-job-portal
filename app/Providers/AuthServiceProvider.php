@@ -16,6 +16,7 @@ use App\Models\{
     UserTraining,
     UserDocument,
     UserPublication,
+    ApplicationHistory,
 
 
 };
@@ -27,7 +28,8 @@ use App\Policies\{
     RefereePolicy,
     UserTrainingPolicy,
     UserDocumentPolicy,
-    UserPublicationPolicy
+    UserPublicationPolicy,
+    ApplicationHistoryPolicy,
 };
 
 
@@ -50,6 +52,7 @@ class AuthServiceProvider extends ServiceProvider
         UserDocument::class => UserDocumentPolicy::class,
         UserPublication::class => UserPublicationPolicy::class,
         UserAward::class => UserAwardPolicy::class,
+        // ApplicationHistory::class => ApplicationHistoryPolicy::class,
     ];
 
     /**

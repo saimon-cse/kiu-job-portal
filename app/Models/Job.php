@@ -26,4 +26,10 @@ class Job extends Model
     {
         return $this->hasMany(ApplicationHistory::class);
     }
+
+    // Relationship to its direct applications
+    public function applications()
+    {
+        return $this->hasMany(ApplicationHistory::class, 'job_id');
+    }
 }

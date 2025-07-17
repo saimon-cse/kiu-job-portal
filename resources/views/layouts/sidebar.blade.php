@@ -17,7 +17,7 @@
         </div>
 
         <!-- User Profile -->
-        <div class="px-4 py-3 flex items-center space-x-3 border-b border-gray-200">
+        {{-- <div class="px-4 py-3 flex items-center space-x-3 border-b border-gray-200">
             <div class="relative">
                 <img class="w-10 h-10 rounded-full object-cover"
                     src="{{ Auth::user()->profile_picture ? Storage::url(Auth::user()->profile_picture) : 'https://ui-avatars.com/api/?name=' . urlencode(Auth::user()->name) }}"
@@ -29,15 +29,42 @@
                 <p class="text-sm font-medium text-gray-800">{{ Auth::user()->name }}</p>
                 <p class="text-xs text-gray-500">{{ Auth::user()->email }}</p>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Navigation -->
         <div class="flex-1 px-3 py-4 overflow-y-auto">
             <nav class="space-y-1">
-                {{-- === Main Navigation === --}}
+
+                {{-- ======================== --}}
+                {{--      USER MENU           --}}
+                {{-- ======================== --}}
+                <p class="px-3 pt-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">User Menu</p>
+
                 <x-sidebar-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                     <i class="fas fa-tachometer-alt mr-3 w-5 text-center"></i>
                     Dashboard
+                </x-sidebar-link>
+
+                  {{-- This link now correctly checks for all related profile management routes --}}
+                <x-sidebar-link :href="route('profile.edit')" :active="request()->is('profile*') ||
+                    request()->is('education*') ||
+                    request()->is('experience*') ||
+                    request()->is('training*') ||
+                    request()->is('language*') ||
+                    request()->is('publication*') ||
+                    request()->is('award*') ||
+                    request()->is('referee*') ||
+                    request()->is('document*') ||
+                    request()->is('images*') ||
+                    request()->is('settings*')">
+                    <i class="fas fa-user-edit mr-3 w-5 text-center"></i>
+                    Manage Profile
+                </x-sidebar-link>
+
+
+                <x-sidebar-link :href="route('profile.preview')" :active="request()->routeIs('profile.preview')">
+                    <i class="fas fa-eye mr-3 w-5 text-center"></i>
+                    Preview Profile
                 </x-sidebar-link>
 
                 <x-sidebar-link :href="route('circulars.index')" :active="request()->routeIs('circulars.*')">
@@ -45,106 +72,79 @@
                     Available Jobs
                 </x-sidebar-link>
 
-                {{-- Link to the Profile Management Area --}}
-                <x-sidebar-link :href="route('profile.edit')" :active="request()->is('profile*') ||
-                    request()->is('education*') ||
-                    request()->is('experience*') ||
-                    request()->is('training*') ||
-                    request()->is('language*') ||
-                    request()->is('referee*') ||
-                    request()->is('publication*') ||
-                    request()->is('award*') ||
-                    request()->is('document*')">
-                    <i class="fas fa-user-edit mr-3 w-5 text-center"></i>
-                    Manage My Profile
+                <x-sidebar-link :href="route('applications.history.index')" :active="request()->routeIs('applications.history.index')">
+                    <i class="fas fa-file-alt mr-3 w-5 text-center"></i>
+                    Application History
                 </x-sidebar-link>
 
 
-                <x-sidebar-link :href="route('profile.preview')" :active="request()->routeIs('profile.preview')">
-                    <i class="fas fa-eye mr-3 w-5 text-center"></i>
-                    Preview My Profile
-                </x-sidebar-link>
 
-{{-- FIND THIS LINK IN YOUR SIDEBAR --}}
-<x-sidebar-link :href="route('applications.history.index')" :active="request()->routeIs('applications.history.index')">
-    <i class="fas fa-file-alt mr-3 w-5 text-center"></i>
-    My Applications
-</x-sidebar-link>
-
-                <x-sidebar-link :href="route('profile.settings')" :active="request()->routeIs('profile.settings')">
+                {{-- <x-sidebar-link :href="route('profile.settings')" :active="request()->routeIs('profile.settings')">
                     <i class="fas fa-cog mr-3 w-5 text-center"></i>
                     Account Settings
-                </x-sidebar-link>
+                </x-sidebar-link> --}}
 
-                {{-- ============================================= --}}
-                {{-- START: ADMIN SECTION WITH DROPDOWNS           --}}
-                {{-- ============================================= --}}
 
-                {{-- === Admin Panel Section === --}}
+                {{-- ======================== --}}
+                {{--      ADMIN PANEL         --}}
+                {{-- ======================== --}}
                 @if (auth()->user()->can('access admin panel'))
                     <div class="pt-4 mt-4 border-t border-gray-200">
                         <p class="px-3 text-xs font-semibold text-gray-500 uppercase tracking-wider">Admin Panel</p>
 
+                        {{-- Job Management Dropdown --}}
+                        @canany(['manage-circulars'])
+                            <x-sidebar-dropdown title="Job Management" icon="fas fa-briefcase" :active="request()->routeIs('admin.circulars.*') ||
+                                request()->routeIs('admin.jobs.*') ||
+                                request()->routeIs('admin.applications.*')">
+                                <x-sidebar-link :href="route('admin.circulars.index')" :active="request()->routeIs('admin.circulars.*') ||
+                                    request()->routeIs('admin.jobs.*') ||
+                                    request()->routeIs('admin.applications.*')">
+                                    Circulars & Apps
+                                </x-sidebar-link>
+                            </x-sidebar-dropdown>
+                        @endcanany
+
                         {{-- Access Control Dropdown --}}
                         @canany(['manage-users', 'manage-roles'])
                             <x-sidebar-dropdown title="Access Control" icon="fas fa-user-shield" :active="request()->routeIs('admin.users.*') || request()->routeIs('admin.roles.*')">
-
                                 @can('manage-users')
                                     <x-sidebar-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
                                         Users
                                     </x-sidebar-link>
                                 @endcan
-
                                 @can('manage-roles')
                                     <x-sidebar-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.*')">
                                         Roles & Permissions
                                     </x-sidebar-link>
                                 @endcan
-
                             </x-sidebar-dropdown>
-                        @endcanany
-
-                        @canany(['manage-circulars', 'manage-jobs'])
-                            <x-sidebar-dropdown title="Job Management" icon="fas fa-briefcase" :active="request()->routeIs('admin.circulars.*')">
-
-                                @can('manage-circulars')
-                                    <x-sidebar-link :href="route('admin.circulars.index')" :active="request()->routeIs('admin.circulars.*')">
-                                        Circulars & Posts
-                                    </x-sidebar-link>
-                                @endcan
-
-                            </x-sidebar-dropdown>
-
-                            @can('manage-publication-types')
-                                <x-sidebar-link :href="route('admin.publication-types.index')" :active="request()->routeIs('admin.publication-types.*')">
-                                    <i class="fas fa-book-open mr-3 w-5 text-center"></i>
-                                    Publication Types
-                                </x-sidebar-link>
-                            @endcan
                         @endcanany
 
                         {{-- Site Management Dropdown --}}
-                        @canany(['manage-settings'])
-                            {{-- <x-sidebar-dropdown title="Site Management" icon="fas fa-cogs" :active="request()->routeIs('admin.settings.*')"> --}}
-
-                            @can('manage-settings')
-                                <x-sidebar-link :href="route('admin.settings.index')" :active="request()->routeIs('admin.settings.*')">
-                                    <i class="fas fa-cog mr-3 w-5 text-center"></i>
-                                    Site Settings
-                                </x-sidebar-link>
-                            @endcan
-
-                            {{-- </x-sidebar-dropdown> --}}
+                        @canany(['manage-settings', 'manage-publication-types'])
+                            <x-sidebar-dropdown title="Site Management" icon="fas fa-cogs" :active="request()->routeIs('admin.settings.*') ||
+                                request()->routeIs('admin.publication-types.*')">
+                                @can('manage-settings')
+                                    <x-sidebar-link :href="route('admin.settings.index')" :active="request()->routeIs('admin.settings.*')">
+                                        Site Settings
+                                    </x-sidebar-link>
+                                @endcan
+                                @can('manage-publication-types')
+                                    <x-sidebar-link :href="route('admin.publication-types.index')" :active="request()->routeIs('admin.publication-types.*')">
+                                        Publication Types
+                                    </x-sidebar-link>
+                                @endcan
+                            </x-sidebar-dropdown>
                         @endcanany
 
                     </div>
                 @endif
-                {{-- =========================================== --}}
-                {{-- END: ADMIN SECTION                      --}}
-                {{-- =========================================== --}}
 
+                {{-- ======================== --}}
+                {{--      ACCOUNT ACTIONS     --}}
+                {{-- ======================== --}}
                 <div class="pt-4 mt-4 border-t border-gray-200">
-                    <!-- Logout -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <x-sidebar-link :href="route('logout')"

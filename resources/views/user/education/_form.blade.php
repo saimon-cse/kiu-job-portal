@@ -10,6 +10,17 @@
         </div>
     </div>
 
+     <!-- Course / Major -->
+        <div>
+            <label for="course_studied" class="block text-sm font-medium text-gray-700">Suject / Group</label>
+            <div class="mt-1">
+                <input type="text" name="course_studied" id="course_studied"
+                    value="{{ old('course_studied', isset($education) ? $education->course_studied : '') }}"
+                    {{-- placeholder="e.g., Computer Science and Engineering" --}}
+                    class="block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
+            </div>
+        </div>
+
     <!-- Institution Name -->
     <div>
         <label for="institution_name" class="block text-sm font-medium text-gray-700">Institution Name</label>
@@ -20,6 +31,8 @@
                 class="block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
         </div>
     </div>
+
+
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <!-- Passing Year -->
@@ -66,13 +79,5 @@
 
 
 
-        <!-- Course / Major -->
-        {{-- <div>
-        <label for="course_studied" class="block text-sm font-medium text-gray-700">Course / Major (Optional)</label>
-        <div class="mt-1">
-            <input type="text" name="course_studied" id="course_studied" value="{{ old('course_studied', isset($education) ? $education->course_studied : '') }}"
-                   placeholder="e.g., Computer Science and Engineering"
-                   class="block w-full md:w-2/3 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500">
-        </div>
-    </div> --}}
+
     </div>

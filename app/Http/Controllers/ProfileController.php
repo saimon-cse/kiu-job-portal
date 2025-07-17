@@ -36,18 +36,16 @@ class ProfileController extends Controller
      * Update the user's profile information.
      * This method now also validates and saves the extended profile data.
      *
-     * @param \App\Http\Requests\ProfileUpdateRequest $request
-     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(ProfileUpdateRequest $request)
     {
         // This part handles the 'name' and 'email' from the `users` table,
         // using the validation from ProfileUpdateRequest.
-        $request->user()->fill($request->validated());
+        // $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+        // if ($request->user()->isDirty('email')) {
+        //     $request->user()->email_verified_at = null;
+        // }
 
         // --- NEW: VALIDATE AND PREPARE DATA FOR THE 'user_profiles' TABLE ---
         // We define validation rules for all the fields from your migration.
@@ -72,6 +70,8 @@ class ProfileController extends Controller
             'phone_mobile' => 'nullable|string|max:20',
             'additional_information' => 'nullable|string',
             'quota_information' => 'nullable|string',
+            'dismissal_reason' => ['nullable', 'string'],
+            'service_obligation_details' => ['nullable', 'string'],
         ]);
 
         // --- NEW: SAVE THE EXTENDED PROFILE DATA ---
@@ -86,7 +86,7 @@ class ProfileController extends Controller
         // --- END NEW ---
 
         // Save the changes to the `users` table model.
-        $request->user()->save();
+        // $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

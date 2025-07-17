@@ -24,7 +24,27 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::cSfeTEPfnaNfzji6',
+            '_route' => 'generated::okQNVGexZwBoM4bY',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/dashboard' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'dashboard',
           ),
           1 => NULL,
           2 => 
@@ -65,26 +85,6 @@ app('router')->setCompiledRoutes(
           0 => 
           array (
             '_route' => 'circulars.index',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/dashboard' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'dashboard',
           ),
           1 => NULL,
           2 => 
@@ -289,62 +289,6 @@ app('router')->setCompiledRoutes(
           0 => 
           array (
             '_route' => 'experience.create',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/publication' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'publication.index',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'publication.store',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/publication/create' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'publication.create',
           ),
           1 => NULL,
           2 => 
@@ -564,6 +508,81 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/publication' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'publication.index',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'publication.store',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/publication/create' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'publication.create',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/publications/reorder' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'publication.reorder',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/award' => 
       array (
         0 => 
@@ -731,168 +750,13 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      '/publications/reorder' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'publication.reorder',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/my-applications' => 
+      '/applications' => 
       array (
         0 => 
         array (
           0 => 
           array (
             '_route' => 'applications.history.index',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/success' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'payment.success',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/payment/fail' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'payment.fail',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/payment/cancel' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'payment.cancel',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/payment/ipn' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'payment.ipn',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/pay-via-ajax' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'payment.ajax',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'POST' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/example1' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'generated::zIYr8P0IRbfeNrFa',
-          ),
-          1 => NULL,
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      '/example2' => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'generated::4zrqax2hUFqjO2Ui',
           ),
           1 => NULL,
           2 => 
@@ -929,7 +793,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::mivOO8Ukbnhj5ZnI',
+            '_route' => 'generated::eSymjUkknnFPieA0',
           ),
           1 => NULL,
           2 => 
@@ -965,7 +829,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::ETYdVLY2EWzXjOmT',
+            '_route' => 'generated::kO6Yc0XziuML9pRl',
           ),
           1 => NULL,
           2 => 
@@ -1095,7 +959,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::bJUKoBwkY2Kt32fD',
+            '_route' => 'generated::XdV3t0oc481q5Qiv',
           ),
           1 => NULL,
           2 => 
@@ -1337,7 +1201,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::2X28OvkweIED3YUJ',
+            '_route' => 'generated::9rRxKyYuai1vi99J',
           ),
           1 => NULL,
           2 => 
@@ -1407,13 +1271,125 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
+      '/payment/success' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'payment.success.page',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'payment.success.webhook',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/payment/fail' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'payment.fail',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/payment/cancel' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'payment.cancel',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/payment/ipn' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'payment.ipn',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      '/pay-via-ajax' => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'payment.ajax',
+          ),
+          1 => NULL,
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
       '/api/user' => 
       array (
         0 => 
         array (
           0 => 
           array (
-            '_route' => 'generated::mXDREZS8bVzJpnP3',
+            '_route' => 'generated::ocEtqijKMTKTE47G',
           ),
           1 => NULL,
           2 => 
@@ -1430,7 +1406,7 @@ app('router')->setCompiledRoutes(
     ),
     2 => 
     array (
-      0 => '{^(?|/circulars/([^/]++)(*:26)|/e(?|ducation/(?|([^/]++)(?|/edit(*:66)|(*:73))|reorder(*:88))|xperience/(?|([^/]++)(?|/edit(*:125)|(*:133))|reorder(*:149)))|/p(?|ublication/([^/]++)(?|/edit(*:191)|(*:199))|ayment/pay/([^/]++)(*:227))|/language/([^/]++)(?|/edit(*:262)|(*:270))|/re(?|feree/([^/]++)(?|/edit(*:307)|(*:315))|set\\-password/([^/]++)(*:346))|/training/(?|([^/]++)(?|/edit(*:384)|(*:392))|reorder(*:408))|/a(?|ward/([^/]++)(?|/edit(*:443)|(*:451))|dmin/(?|users/([^/]++)(?|(*:485)|/edit(*:498)|(*:506))|roles/([^/]++)(?|(*:532)|/edit(*:545)|(*:553))|publication\\-types/([^/]++)(?|/edit(*:597)|(*:605))|circulars/([^/]++)(?|(*:635)|/edit(*:648)|(*:656))))|/document/([^/]++)(?|/edit(*:693)|(*:701))|/jobs/([^/]++)/apply(*:730)|/verify\\-email/([^/]++)/([^/]++)(*:770))/?$}sDu',
+      0 => '{^(?|/circulars/([^/]++)(*:26)|/e(?|ducation/(?|([^/]++)(?|/edit(*:66)|(*:73))|reorder(*:88))|xperience/(?|([^/]++)(?|/edit(*:125)|(*:133))|reorder(*:149)))|/language/([^/]++)(?|/edit(*:185)|(*:193))|/re(?|feree/([^/]++)(?|/edit(*:230)|(*:238))|set\\-password/([^/]++)(*:269))|/training/(?|([^/]++)(?|/edit(*:307)|(*:315))|reorder(*:331))|/p(?|ublication/([^/]++)(?|/edit(*:372)|(*:380))|ayment/pay/([^/]++)(*:408))|/a(?|ward/([^/]++)(?|/edit(*:443)|(*:451))|pplications/([^/]++)(*:480)|dmin/(?|users/([^/]++)(?|(*:513)|/edit(*:526)|(*:534))|roles/([^/]++)(?|(*:560)|/edit(*:573)|(*:581))|publication\\-types/([^/]++)(?|/edit(*:625)|(*:633))|circulars/([^/]++)(?|/(?|edit(*:671)|jobs(*:683))|(*:692))|jobs/([^/]++)/applications(*:727)|applications/(?|([^/]++)(?|(*:762)|/status(*:777))|bulk\\-update\\-status(*:806))))|/document/([^/]++)(?|/edit(*:843)|(*:851))|/jobs/([^/]++)/apply(*:880)|/verify\\-email/([^/]++)/([^/]++)(*:920))/?$}sDu',
     ),
     3 => 
     array (
@@ -1629,95 +1605,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      191 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'publication.edit',
-          ),
-          1 => 
-          array (
-            0 => 'publication',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => false,
-          6 => NULL,
-        ),
-      ),
-      199 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'publication.update',
-          ),
-          1 => 
-          array (
-            0 => 'publication',
-          ),
-          2 => 
-          array (
-            'PUT' => 0,
-            'PATCH' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-        1 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'publication.destroy',
-          ),
-          1 => 
-          array (
-            0 => 'publication',
-          ),
-          2 => 
-          array (
-            'DELETE' => 0,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      227 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'payment.pay',
-          ),
-          1 => 
-          array (
-            0 => 'application',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      262 => 
+      185 => 
       array (
         0 => 
         array (
@@ -1740,7 +1628,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      270 => 
+      193 => 
       array (
         0 => 
         array (
@@ -1782,7 +1670,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      307 => 
+      230 => 
       array (
         0 => 
         array (
@@ -1805,7 +1693,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      315 => 
+      238 => 
       array (
         0 => 
         array (
@@ -1847,7 +1735,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      346 => 
+      269 => 
       array (
         0 => 
         array (
@@ -1870,7 +1758,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      384 => 
+      307 => 
       array (
         0 => 
         array (
@@ -1893,7 +1781,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      392 => 
+      315 => 
       array (
         0 => 
         array (
@@ -1935,7 +1823,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      408 => 
+      331 => 
       array (
         0 => 
         array (
@@ -1953,6 +1841,94 @@ app('router')->setCompiledRoutes(
           3 => NULL,
           4 => false,
           5 => false,
+          6 => NULL,
+        ),
+      ),
+      372 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'publication.edit',
+          ),
+          1 => 
+          array (
+            0 => 'publication',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      380 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'publication.update',
+          ),
+          1 => 
+          array (
+            0 => 'publication',
+          ),
+          2 => 
+          array (
+            'PUT' => 0,
+            'PATCH' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+        1 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'publication.destroy',
+          ),
+          1 => 
+          array (
+            0 => 'publication',
+          ),
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      408 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'payment.pay',
+          ),
+          1 => 
+          array (
+            0 => 'application',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
           6 => NULL,
         ),
       ),
@@ -2021,7 +1997,29 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      485 => 
+      480 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'applications.history.destroy',
+          ),
+          1 => 
+          array (
+            0 => 'application',
+          ),
+          2 => 
+          array (
+            'DELETE' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      513 => 
       array (
         0 => 
         array (
@@ -2044,7 +2042,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      498 => 
+      526 => 
       array (
         0 => 
         array (
@@ -2067,7 +2065,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      506 => 
+      534 => 
       array (
         0 => 
         array (
@@ -2109,7 +2107,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      532 => 
+      560 => 
       array (
         0 => 
         array (
@@ -2132,7 +2130,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      545 => 
+      573 => 
       array (
         0 => 
         array (
@@ -2155,7 +2153,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      553 => 
+      581 => 
       array (
         0 => 
         array (
@@ -2197,7 +2195,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      597 => 
+      625 => 
       array (
         0 => 
         array (
@@ -2220,7 +2218,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      605 => 
+      633 => 
       array (
         0 => 
         array (
@@ -2262,30 +2260,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      635 => 
-      array (
-        0 => 
-        array (
-          0 => 
-          array (
-            '_route' => 'admin.circulars.show',
-          ),
-          1 => 
-          array (
-            0 => 'circular',
-          ),
-          2 => 
-          array (
-            'GET' => 0,
-            'HEAD' => 1,
-          ),
-          3 => NULL,
-          4 => false,
-          5 => true,
-          6 => NULL,
-        ),
-      ),
-      648 => 
+      671 => 
       array (
         0 => 
         array (
@@ -2308,7 +2283,30 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      656 => 
+      683 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.circulars.jobs.index',
+          ),
+          1 => 
+          array (
+            0 => 'circular',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      692 => 
       array (
         0 => 
         array (
@@ -2323,7 +2321,6 @@ app('router')->setCompiledRoutes(
           2 => 
           array (
             'PUT' => 0,
-            'PATCH' => 1,
           ),
           3 => NULL,
           4 => false,
@@ -2350,7 +2347,96 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      693 => 
+      727 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.jobs.applications.index',
+          ),
+          1 => 
+          array (
+            0 => 'job',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      762 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.applications.show',
+          ),
+          1 => 
+          array (
+            0 => 'application',
+          ),
+          2 => 
+          array (
+            'GET' => 0,
+            'HEAD' => 1,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => true,
+          6 => NULL,
+        ),
+      ),
+      777 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.applications.status.update',
+          ),
+          1 => 
+          array (
+            0 => 'application',
+          ),
+          2 => 
+          array (
+            'PUT' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      806 => 
+      array (
+        0 => 
+        array (
+          0 => 
+          array (
+            '_route' => 'admin.applications.status.bulk-update',
+          ),
+          1 => 
+          array (
+          ),
+          2 => 
+          array (
+            'POST' => 0,
+          ),
+          3 => NULL,
+          4 => false,
+          5 => false,
+          6 => NULL,
+        ),
+      ),
+      843 => 
       array (
         0 => 
         array (
@@ -2373,7 +2459,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      701 => 
+      851 => 
       array (
         0 => 
         array (
@@ -2415,7 +2501,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      730 => 
+      880 => 
       array (
         0 => 
         array (
@@ -2437,7 +2523,7 @@ app('router')->setCompiledRoutes(
           6 => NULL,
         ),
       ),
-      770 => 
+      920 => 
       array (
         0 => 
         array (
@@ -2476,7 +2562,7 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
-    'generated::cSfeTEPfnaNfzji6' => 
+    'generated::okQNVGexZwBoM4bY' => 
     array (
       'methods' => 
       array (
@@ -2497,7 +2583,46 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'as' => 'generated::cSfeTEPfnaNfzji6',
+        'as' => 'generated::okQNVGexZwBoM4bY',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'dashboard' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'dashboard',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:264:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:46:"function () {
+    return \\view(\'dashboard\');
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006050000000000000000";}";s:4:"hash";s:44:"6w2DfS+RminAc2aJJKGi/YQC3WxAID37uHFnq95ej9Q=";}}',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'dashboard',
       ),
       'fallback' => false,
       'defaults' => 
@@ -2620,45 +2745,6 @@ app('router')->setCompiledRoutes(
       'bindingFields' => 
       array (
         'circular' => 'circular_no',
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'dashboard' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'dashboard',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-        ),
-        'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:264:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:46:"function () {
-    return \\view(\'dashboard\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000000006080000000000000000";}";s:4:"hash";s:44:"ZTWPIygCSNIAxHCAKMjzSCUOtAAM/LhNiKenZaNR4kU=";}}',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'dashboard',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
       ),
       'lockSeconds' => NULL,
       'waitSeconds' => NULL,
@@ -3363,238 +3449,6 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'experience.reorder',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'publication.index' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'publication',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-          2 => 'verified',
-        ),
-        'as' => 'publication.index',
-        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@index',
-        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@index',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'publication.create' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'publication/create',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-          2 => 'verified',
-        ),
-        'as' => 'publication.create',
-        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@create',
-        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@create',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'publication.store' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'publication',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-          2 => 'verified',
-        ),
-        'as' => 'publication.store',
-        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@store',
-        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@store',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'publication.edit' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'publication/{publication}/edit',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-          2 => 'verified',
-        ),
-        'as' => 'publication.edit',
-        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@edit',
-        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@edit',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'publication.update' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'PUT',
-        1 => 'PATCH',
-      ),
-      'uri' => 'publication/{publication}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-          2 => 'verified',
-        ),
-        'as' => 'publication.update',
-        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@update',
-        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@update',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'publication.destroy' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'DELETE',
-      ),
-      'uri' => 'publication/{publication}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-          2 => 'verified',
-        ),
-        'as' => 'publication.destroy',
-        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@destroy',
-        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@destroy',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
       ),
       'fallback' => false,
       'defaults' => 
@@ -4399,6 +4253,269 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
+    'publication.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'publication',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'publication.index',
+        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@index',
+        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@index',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'publication.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'publication/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'publication.create',
+        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@create',
+        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@create',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'publication.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'publication',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'publication.store',
+        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@store',
+        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@store',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'publication.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'publication/{publication}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'publication.edit',
+        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@edit',
+        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@edit',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'publication.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'publication/{publication}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'publication.update',
+        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@update',
+        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@update',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'publication.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'publication/{publication}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'publication.destroy',
+        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@destroy',
+        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@destroy',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'publication.reorder' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'publications/reorder',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@reorder',
+        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@reorder',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'publication.reorder',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
     'award.index' => 
     array (
       'methods' => 
@@ -4965,44 +5082,6 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'publication.reorder' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'publications/reorder',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-          2 => 'verified',
-        ),
-        'uses' => 'App\\Http\\Controllers\\User\\PublicationController@reorder',
-        'controller' => 'App\\Http\\Controllers\\User\\PublicationController@reorder',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'publication.reorder',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
     'applications.history.index' => 
     array (
       'methods' => 
@@ -5010,7 +5089,7 @@ app('router')->setCompiledRoutes(
         0 => 'GET',
         1 => 'HEAD',
       ),
-      'uri' => 'my-applications',
+      'uri' => 'applications',
       'action' => 
       array (
         'middleware' => 
@@ -5027,6 +5106,44 @@ app('router')->setCompiledRoutes(
         array (
         ),
         'as' => 'applications.history.index',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'applications.history.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'applications/{application}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'verified',
+        ),
+        'uses' => 'App\\Http\\Controllers\\JobApplicationController@destroy',
+        'controller' => 'App\\Http\\Controllers\\JobApplicationController@destroy',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'applications.history.destroy',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5080,300 +5197,6 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'payment.pay' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'payment/pay/{application}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-          2 => 'verified',
-        ),
-        'uses' => 'App\\Http\\Controllers\\PaymentController@pay',
-        'controller' => 'App\\Http\\Controllers\\PaymentController@pay',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'payment.pay',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'payment.success' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'success',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\PaymentController@success',
-        'controller' => 'App\\Http\\Controllers\\PaymentController@success',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'payment.success',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'payment.fail' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'payment/fail',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\PaymentController@fail',
-        'controller' => 'App\\Http\\Controllers\\PaymentController@fail',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'payment.fail',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'payment.cancel' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'payment/cancel',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\PaymentController@cancel',
-        'controller' => 'App\\Http\\Controllers\\PaymentController@cancel',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'payment.cancel',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'payment.ipn' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'payment/ipn',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\PaymentController@ipn',
-        'controller' => 'App\\Http\\Controllers\\PaymentController@ipn',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'payment.ipn',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'payment.ajax' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'POST',
-      ),
-      'uri' => 'pay-via-ajax',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\PaymentController@payViaAjax',
-        'controller' => 'App\\Http\\Controllers\\PaymentController@payViaAjax',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'payment.ajax',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'generated::zIYr8P0IRbfeNrFa' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'example1',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\SslCommerzPaymentController@exampleEasyCheckout',
-        'controller' => 'App\\Http\\Controllers\\SslCommerzPaymentController@exampleEasyCheckout',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'generated::zIYr8P0IRbfeNrFa',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'generated::4zrqax2hUFqjO2Ui' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'example2',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-        ),
-        'uses' => 'App\\Http\\Controllers\\SslCommerzPaymentController@exampleHostedCheckout',
-        'controller' => 'App\\Http\\Controllers\\SslCommerzPaymentController@exampleHostedCheckout',
-        'namespace' => NULL,
-        'prefix' => '',
-        'where' => 
-        array (
-        ),
-        'as' => 'generated::4zrqax2hUFqjO2Ui',
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
     'register' => 
     array (
       'methods' => 
@@ -5412,7 +5235,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::mivOO8Ukbnhj5ZnI' => 
+    'generated::eSymjUkknnFPieA0' => 
     array (
       'methods' => 
       array (
@@ -5433,7 +5256,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::mivOO8Ukbnhj5ZnI',
+        'as' => 'generated::eSymjUkknnFPieA0',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5487,7 +5310,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::ETYdVLY2EWzXjOmT' => 
+    'generated::kO6Yc0XziuML9pRl' => 
     array (
       'methods' => 
       array (
@@ -5508,7 +5331,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::ETYdVLY2EWzXjOmT',
+        'as' => 'generated::kO6Yc0XziuML9pRl',
       ),
       'fallback' => false,
       'defaults' => 
@@ -5828,7 +5651,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::bJUKoBwkY2Kt32fD' => 
+    'generated::XdV3t0oc481q5Qiv' => 
     array (
       'methods' => 
       array (
@@ -5849,7 +5672,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::bJUKoBwkY2Kt32fD',
+        'as' => 'generated::XdV3t0oc481q5Qiv',
       ),
       'fallback' => false,
       'defaults' => 
@@ -6775,7 +6598,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::2X28OvkweIED3YUJ' => 
+    'generated::9rRxKyYuai1vi99J' => 
     array (
       'methods' => 
       array (
@@ -6799,7 +6622,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::2X28OvkweIED3YUJ',
+        'as' => 'generated::9rRxKyYuai1vi99J',
       ),
       'fallback' => false,
       'defaults' => 
@@ -6832,9 +6655,9 @@ app('router')->setCompiledRoutes(
           2 => 'verified',
           3 => 'can:manage-circulars',
         ),
-        'as' => 'admin.circulars.index',
         'uses' => 'App\\Http\\Controllers\\Admin\\CircularController@index',
         'controller' => 'App\\Http\\Controllers\\Admin\\CircularController@index',
+        'as' => 'admin.circulars.index',
         'namespace' => NULL,
         'prefix' => '/admin',
         'where' => 
@@ -6872,9 +6695,9 @@ app('router')->setCompiledRoutes(
           2 => 'verified',
           3 => 'can:manage-circulars',
         ),
-        'as' => 'admin.circulars.create',
         'uses' => 'App\\Http\\Controllers\\Admin\\CircularController@create',
         'controller' => 'App\\Http\\Controllers\\Admin\\CircularController@create',
+        'as' => 'admin.circulars.create',
         'namespace' => NULL,
         'prefix' => '/admin',
         'where' => 
@@ -6911,49 +6734,9 @@ app('router')->setCompiledRoutes(
           2 => 'verified',
           3 => 'can:manage-circulars',
         ),
-        'as' => 'admin.circulars.store',
         'uses' => 'App\\Http\\Controllers\\Admin\\CircularController@store',
         'controller' => 'App\\Http\\Controllers\\Admin\\CircularController@store',
-        'namespace' => NULL,
-        'prefix' => '/admin',
-        'where' => 
-        array (
-        ),
-      ),
-      'fallback' => false,
-      'defaults' => 
-      array (
-      ),
-      'wheres' => 
-      array (
-      ),
-      'bindingFields' => 
-      array (
-      ),
-      'lockSeconds' => NULL,
-      'waitSeconds' => NULL,
-      'withTrashed' => false,
-    ),
-    'admin.circulars.show' => 
-    array (
-      'methods' => 
-      array (
-        0 => 'GET',
-        1 => 'HEAD',
-      ),
-      'uri' => 'admin/circulars/{circular}',
-      'action' => 
-      array (
-        'middleware' => 
-        array (
-          0 => 'web',
-          1 => 'auth',
-          2 => 'verified',
-          3 => 'can:manage-circulars',
-        ),
-        'as' => 'admin.circulars.show',
-        'uses' => 'App\\Http\\Controllers\\Admin\\CircularController@show',
-        'controller' => 'App\\Http\\Controllers\\Admin\\CircularController@show',
+        'as' => 'admin.circulars.store',
         'namespace' => NULL,
         'prefix' => '/admin',
         'where' => 
@@ -6991,9 +6774,9 @@ app('router')->setCompiledRoutes(
           2 => 'verified',
           3 => 'can:manage-circulars',
         ),
-        'as' => 'admin.circulars.edit',
         'uses' => 'App\\Http\\Controllers\\Admin\\CircularController@edit',
         'controller' => 'App\\Http\\Controllers\\Admin\\CircularController@edit',
+        'as' => 'admin.circulars.edit',
         'namespace' => NULL,
         'prefix' => '/admin',
         'where' => 
@@ -7019,7 +6802,6 @@ app('router')->setCompiledRoutes(
       'methods' => 
       array (
         0 => 'PUT',
-        1 => 'PATCH',
       ),
       'uri' => 'admin/circulars/{circular}',
       'action' => 
@@ -7031,9 +6813,9 @@ app('router')->setCompiledRoutes(
           2 => 'verified',
           3 => 'can:manage-circulars',
         ),
-        'as' => 'admin.circulars.update',
         'uses' => 'App\\Http\\Controllers\\Admin\\CircularController@update',
         'controller' => 'App\\Http\\Controllers\\Admin\\CircularController@update',
+        'as' => 'admin.circulars.update',
         'namespace' => NULL,
         'prefix' => '/admin',
         'where' => 
@@ -7070,9 +6852,9 @@ app('router')->setCompiledRoutes(
           2 => 'verified',
           3 => 'can:manage-circulars',
         ),
-        'as' => 'admin.circulars.destroy',
         'uses' => 'App\\Http\\Controllers\\Admin\\CircularController@destroy',
         'controller' => 'App\\Http\\Controllers\\Admin\\CircularController@destroy',
+        'as' => 'admin.circulars.destroy',
         'namespace' => NULL,
         'prefix' => '/admin',
         'where' => 
@@ -7093,7 +6875,460 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::mXDREZS8bVzJpnP3' => 
+    'admin.circulars.jobs.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'admin/circulars/{circular}/jobs',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'verified',
+          3 => 'can:manage-circulars',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\JobManagementController@index',
+        'controller' => 'App\\Http\\Controllers\\Admin\\JobManagementController@index',
+        'as' => 'admin.circulars.jobs.index',
+        'namespace' => NULL,
+        'prefix' => '/admin',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.jobs.applications.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'admin/jobs/{job}/applications',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'verified',
+          3 => 'can:view-applications',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\ApplicationManagementController@indexForJob',
+        'controller' => 'App\\Http\\Controllers\\Admin\\ApplicationManagementController@indexForJob',
+        'as' => 'admin.jobs.applications.index',
+        'namespace' => NULL,
+        'prefix' => '/admin',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.applications.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'admin/applications/{application}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'verified',
+          3 => 'can:view-applications',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\ApplicationManagementController@show',
+        'controller' => 'App\\Http\\Controllers\\Admin\\ApplicationManagementController@show',
+        'as' => 'admin.applications.show',
+        'namespace' => NULL,
+        'prefix' => '/admin',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.applications.status.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+      ),
+      'uri' => 'admin/applications/{application}/status',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'verified',
+          3 => 'can:update-application-status',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\ApplicationManagementController@updateStatus',
+        'controller' => 'App\\Http\\Controllers\\Admin\\ApplicationManagementController@updateStatus',
+        'as' => 'admin.applications.status.update',
+        'namespace' => NULL,
+        'prefix' => '/admin',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'admin.applications.status.bulk-update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'admin/applications/bulk-update-status',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'verified',
+        ),
+        'uses' => 'App\\Http\\Controllers\\Admin\\ApplicationManagementController@bulkUpdateStatus',
+        'controller' => 'App\\Http\\Controllers\\Admin\\ApplicationManagementController@bulkUpdateStatus',
+        'as' => 'admin.applications.status.bulk-update',
+        'namespace' => NULL,
+        'prefix' => '/admin',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'payment.pay' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'payment/pay/{application}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'verified',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PaymentController@pay',
+        'controller' => 'App\\Http\\Controllers\\PaymentController@pay',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'payment.pay',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'payment.success.page' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'payment/success',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PaymentController@successPage',
+        'controller' => 'App\\Http\\Controllers\\PaymentController@successPage',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'payment.success.page',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'payment.success.webhook' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'payment/success',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PaymentController@success',
+        'controller' => 'App\\Http\\Controllers\\PaymentController@success',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'payment.success.webhook',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'payment.fail' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'payment/fail',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PaymentController@fail',
+        'controller' => 'App\\Http\\Controllers\\PaymentController@fail',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'payment.fail',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'payment.cancel' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'payment/cancel',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PaymentController@cancel',
+        'controller' => 'App\\Http\\Controllers\\PaymentController@cancel',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'payment.cancel',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'payment.ipn' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'payment/ipn',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PaymentController@ipn',
+        'controller' => 'App\\Http\\Controllers\\PaymentController@ipn',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'payment.ipn',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'payment.ajax' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'pay-via-ajax',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+        ),
+        'uses' => 'App\\Http\\Controllers\\PaymentController@payViaAjax',
+        'controller' => 'App\\Http\\Controllers\\PaymentController@payViaAjax',
+        'namespace' => NULL,
+        'prefix' => '',
+        'where' => 
+        array (
+        ),
+        'as' => 'payment.ajax',
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::ocEtqijKMTKTE47G' => 
     array (
       'methods' => 
       array (
@@ -7110,13 +7345,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:295:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:77:"function (\\Illuminate\\Http\\Request $request) {
     return $request->user();
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"0000000000000a130000000000000000";}";s:4:"hash";s:44:"y1NEy0NW2zMlB6MtUHMiK3D0BCfyCHdnuZAkxyU2JJ0=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"0000000000000a430000000000000000";}";s:4:"hash";s:44:"Dueqr1FPsdrEOI+x2BDNObtG4z32JaUAxj8XkC1Jl0U=";}}',
         'namespace' => NULL,
         'prefix' => 'api',
         'where' => 
         array (
         ),
-        'as' => 'generated::mXDREZS8bVzJpnP3',
+        'as' => 'generated::ocEtqijKMTKTE47G',
       ),
       'fallback' => false,
       'defaults' => 

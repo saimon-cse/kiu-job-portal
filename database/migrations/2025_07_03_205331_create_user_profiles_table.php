@@ -29,9 +29,11 @@ return new class extends Migration {
             $table->text('present_address_en')->nullable();
             $table->text('phone_mobile')->nullable();
             $table->text('signature_path')->nullable();
-            // $table->text('phone_mobile');
+            $table->text('nid')->nullable();
             $table->text('additional_information')->nullable();
             $table->text('quota_information')->nullable();
+            $table->text('service_obligation_details')->nullable();
+            $table->text('dismissal_reason')->nullable();
             $table->integer('rank')->nullable()->default(0);
             $table->timestamps();
         });
