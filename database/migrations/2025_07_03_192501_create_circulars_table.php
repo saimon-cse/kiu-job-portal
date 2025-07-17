@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateCircularsTable extends Migration
 {
@@ -19,6 +20,9 @@ class CreateCircularsTable extends Migration
             $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
         });
+
+        // Set auto-increment start value
+        DB::statement("ALTER TABLE circulars AUTO_INCREMENT = 1000000;");
     }
 
     public function down()

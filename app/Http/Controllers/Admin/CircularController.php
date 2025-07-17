@@ -11,15 +11,44 @@ use Illuminate\Support\Facades\Storage;
 
 class CircularController extends Controller
 {
-    public function index()
+       /**
+     * Display a listing of the resource with filtering and aggregated counts.
+     */
+    public function index(Request $request)
     {
         $this->authorize('manage-circulars');
-         $circulars = Circular::withCount(['jobs', 'jobApplications'])
-            ->with('creator')
-            ->latest('post_date')
-            ->paginate(10);
+
+        // Start the query
+        $query = Circular::query();
+
+        // Handle search filter
+        if ($request->has('search') && $request->search != '') {
+            $searchTerm = $request->search;
+            $query->where('circular_no', 'like', '%' . $searchTerm . '%');
+        }
+
+        // Eager load all the counts efficiently
+        $circulars = $query->withCount([
+            'jobs',
+            'jobApplications', // Total applications
+            'jobApplications as paid_applications_count' => function ($query) {
+                $query->where('applications_history.status', 'submitted');
+            },
+            'jobApplications as unpaid_applications_count' => function ($query) {
+                $query->where('applications_history.status', 'pending');
+            },
+            'jobApplications as eligible_applications_count' => function ($query) {
+                $query->where('applications_history.status', 'shortlisted');
+            }
+        ])
+        ->with('creator')
+        ->latest('post_date')
+        ->paginate(10)
+        ->withQueryString(); // Appends search query to pagination links
+
         return view('admin.circulars.index', compact('circulars'));
     }
+
 
     public function create()
     {

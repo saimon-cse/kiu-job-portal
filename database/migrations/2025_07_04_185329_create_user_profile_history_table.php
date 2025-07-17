@@ -32,6 +32,8 @@ return new class extends Migration {
             // $table->text('phone_mobile');
             $table->text('additional_information')->nullable();
             $table->text('quota_information')->nullable();
+            $table->text('service_obligation_details')->nullable();
+            $table->text('dismissal_reason')->nullable();
             $table->integer('rank')->nullable()->default(0);
             $table->timestamps();
         });

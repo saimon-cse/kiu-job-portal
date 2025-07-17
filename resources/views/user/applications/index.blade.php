@@ -1,5 +1,4 @@
 <x-app-layout>
-    {{-- Page Header --}}
     <div class="mb-6">
         <h1 class="text-2xl font-bold text-gray-800">My Application History</h1>
         <p class="text-gray-500">Track the status of your applications and complete any required actions.</p>
@@ -7,17 +6,15 @@
 
     @include('partials._session-messages')
 
-    {{-- Application Cards List --}}
     <div class="space-y-6">
         @forelse ($applications as $application)
-            {{-- Each card is a link to the original circular for easy reference --}}
             <div class="bg-white rounded-xl shadow-soft border border-gray-200 overflow-hidden">
                 <div class="p-6">
                     <div class="flex flex-col sm:flex-row justify-between">
-                        {{-- Main Application Info --}}
+                        <!-- Main Application Info -->
                         <div class="flex-grow">
                             <div class="flex items-center mb-2">
-                                {{-- Status Badge --}}
+                                <!-- Status Badge -->
                                 <span
                                     class="px-3 py-1 text-xs font-semibold rounded-full capitalize
                                     @if ($application->status == 'submitted') bg-green-100 text-green-800 @endif
@@ -33,14 +30,14 @@
                                 </p>
                             </div>
 
-                            {{-- Post Name --}}
+                            <!-- Post Name -->
                             <a href="{{ route('circulars.show', $application->job->circular) }}" class="block">
                                 <h2 class="text-xl font-bold text-primary-800 hover:text-primary-600">
                                     {{ $application->job->post_name }}
                                 </h2>
                             </a>
 
-                            {{-- Circular & Fee Info --}}
+                            <!-- Circular & Fee Info -->
                             <p class="text-sm text-gray-600 mt-1">
                                 From Circular: <span
                                     class="font-medium">{{ $application->job->circular->circular_no }}</span>
@@ -50,7 +47,7 @@
                             </p>
                         </div>
 
-                        {{-- Deadline Info --}}
+                        <!-- Deadline Info -->
                         <div class="mt-4 sm:mt-0 sm:ml-6 text-left sm:text-right shrink-0">
                             <p class="text-xs font-medium text-gray-500 uppercase tracking-wider">Application Deadline
                             </p>
@@ -64,35 +61,37 @@
                     </div>
                 </div>
 
-                {{-- Action Footer --}}
+                <!-- Action Footer -->
                 @if ($application->status == 'pending')
                     <div class="border-t border-gray-100 px-6 py-4 bg-gray-50/75">
-                        <div class="flex items-center justify-end">
-                            {{-- Check if the deadline has passed --}}
-                            @if ($application->job->circular->last_date_of_submission->isFuture())
-                                {{-- <form action="{{ route('payment.pay', ['application' => $application->job->id]) }}" method="GET"
-                                    onsubmit="return confirm('Apply for the post of \'{{ $application->job->post_name }}\'? Your current profile information will be saved for this application.');">
+                        <div class="flex items-center justify-between">
+                            {{-- Delete Button (on the left) --}}
+                            <div>
+                                <form action="{{ route('applications.history.destroy', $application) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this pending application?');">
                                     @csrf
-
-                                    <button type="submit"
-                                        class="w-full md:w-auto flex items-center justify-center bg-primary-600 hover:bg-primary-700 text-white py-2 px-6 rounded-lg font-medium">
-                                         <i class="fas fa-credit-card mr-2"></i>
-                                    Complete Payment
+                                    @method('DELETE')
+                                    <button type="submit" class="font-medium text-red-600 hover:text-red-800 text-sm inline-flex items-center">
+                                        <i class="fas fa-trash-alt mr-2"></i>
+                                        Delete Application
                                     </button>
-                                </form> --}}
+                                </form>
+                            </div>
 
-                                <a href="{{ route('payment.pay', ['application' => $application->id]) }}"
-                                    class="font-medium text-white bg-primary-600 hover:bg-primary-700 py-2 px-5 rounded-lg text-sm inline-flex items-center">
-                                    <i class="fas fa-credit-card mr-2"></i>
-                                    Complete Payment
-                                </a>
-                            @else
-                                <div
-                                    class="font-medium text-white bg-gray-400 py-2 px-5 rounded-lg text-sm inline-flex items-center cursor-not-allowed">
-                                    <i class="fas fa-times-circle mr-2"></i>
-                                    Deadline Passed
-                                </div>
-                            @endif
+                            {{-- Payment Button (on the right) --}}
+                            <div>
+                                @if ($application->job->circular->last_date_of_submission->isFuture())
+                                    <a href="{{ route('payment.pay', ['application' => $application->id]) }}"
+                                        class="font-medium text-white bg-primary-600 hover:bg-primary-700 py-2 px-5 rounded-lg text-sm inline-flex items-center">
+                                        <i class="fas fa-credit-card mr-2"></i>
+                                        Complete Payment
+                                    </a>
+                                @else
+                                    <div class="font-medium text-white bg-gray-400 py-2 px-5 rounded-lg text-sm inline-flex items-center cursor-not-allowed">
+                                        <i class="fas fa-times-circle mr-2"></i>
+                                        Deadline Passed
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 @endif
@@ -114,4 +113,7 @@
     <div class="mt-8">
         {{ $applications->links() }}
     </div>
+
+
+
 </x-app-layout>

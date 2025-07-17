@@ -31,12 +31,12 @@
                                             Circular No: <span class="font-semibold text-gray-700">{{ $circular->circular_no }}</span>
                                         </p>
                                     </div>
-                                    <a href="{{ route('circulars.show', $circular) }}" class="block">
+                                    {{-- <a href="{{ route('circulars.show', $circular) }}" class="block">
                                         <h2 class="text-xl font-bold text-primary-800 hover:text-primary-600">
                                             {{ $circular->jobs_count }} {{ Str::plural('Position', $circular->jobs_count) }} Available
                                         </h2>
-                                    </a>
-                                    <p class="text-sm text-gray-600 mt-1 line-clamp-2">
+                                    </a> --}}
+                                    <p class="text-lg text-gray-600 mt-1 line-clamp-2">
                                         {{ Str::limit($circular->description, 180) }}
                                     </p>
                                 </div>

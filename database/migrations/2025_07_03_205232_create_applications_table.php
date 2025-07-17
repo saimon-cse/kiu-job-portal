@@ -21,9 +21,12 @@ return new class extends Migration {
             $table->enum('status', ['pending', 'submitted', 'rejected', 'accepted'])->default('pending');
             $table->timestamps();
         });
+
+        // Set auto-increment start value
+        DB::statement("ALTER TABLE circulars AUTO_INCREMENT = 3000000;");
     }
     public function down(): void
     {
-        Schema::dropIfExists('job_applications');
+        Schema::dropIfExists('applications_history');
     }
 };

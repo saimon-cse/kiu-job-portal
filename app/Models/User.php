@@ -31,6 +31,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserProfile::class);
     }
 
+
+    public function applicationHistories()
+{
+    return $this->hasMany(ApplicationHistory::class);
+}
+
     public function educations()
     {
         return $this->hasMany(UserEducation::class);
@@ -78,6 +84,50 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(ApplicationHistory::class);
     }
 
+    public function profileHistory()
+    {
+        return $this->hasMany(UserProfileHistory::class);
+    }
+
+    public function educationHistory()
+    {
+        return $this->hasMany(UserEducationHistory::class);
+    }
+
+    public function experienceHistory()
+    {
+        return $this->hasMany(UserExperienceHistory::class);
+    }
+
+    public function publicationHistory()
+    {
+        return $this->hasMany(UserPublicationHistory::class);
+    }
+
+    public function trainingHistory()
+    {
+        return $this->hasMany(UserTrainingHistory::class);
+    }
+
+    public function languageHistory()
+    {
+        return $this->hasMany(LanguageProficiencyHistory::class);
+    }
+
+    public function refereeHistory()
+    {
+        return $this->hasMany(RefereeHistory::class);
+    }
+
+    public function awardHistory()
+    {
+        return $this->hasMany(UserAwardHistory::class);
+    }
+
+    public function documentHistory()
+    {
+        return $this->hasMany(UserDocumentHistory::class);
+    }
 
     public function applicationHistory() { return $this->hasMany(ApplicationHistory::class); }
 

@@ -8,7 +8,6 @@ return new class extends Migration {
         Schema::create('user_educations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            // $table->foreignId('application_id')->nullable()->constrained()->onDelete('cascade');
             $table->text('institution_name')->nullable();
             $table->text('period_from')->nullable();
             $table->text('period_to')->nullable();
@@ -17,7 +16,7 @@ return new class extends Migration {
             $table->text('passing_year')->nullable();
             $table->text('document_path')->nullable();
             // $table->integer('rank')->nullable()->default(0);
-            // $table->text('course_studied')->nullable();
+            $table->text('course_studied')->nullable();
             $table->integer('rank')->nullable()->default(0);
             $table->timestamps();
         });
